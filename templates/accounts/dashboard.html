@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  داشبورد
+{% endblock %}
+
+{% block content %}
+  <section class="py-16">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="bg-white border rounded-2xl p-8 shadow-sm">
+        <h1 class="text-3xl font-bold mb-4">سلام {{ request.user.username }} 👋</h1>
+        <p class="text-slate-600 mb-6">به داشبورد رزومه‌ساز خوش اومدی.</p>
+
+        <div class="flex gap-4">
+          <a href="#" class="bg-blue-600 text-white px-5 py-3 rounded-xl hover:bg-blue-700 transition">ساخت رزومه جدید</a>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
