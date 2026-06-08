@@ -69,7 +69,117 @@
 </div>
 
 </div>
+<!-- استایل جدید و حرفه‌ای بخش کامنت‌ها -->
+<style>
+    .comments-wrapper {
+        padding: 60px 0;
+        background-color: #f0f3ff; /* پس‌زمینه اصلی نیلی ملایم */
+        direction: rtl;
+    }
+
+    .comment-card {
+        background: linear-gradient(145deg, #ffffff, #f8faff); /* گرادینت ملایم داخلی */
+        border-radius: 25px; /* گوشه‌های دایره‌ای و نرم */
+        padding: 25px;
+        border: 2px solid #e0e7ff; /* خط دور نیلی روشن */
+        box-shadow: 10px 10px 20px #e2e8f0, -10px -10px 20px #ffffff; /* سایه Neumorphism ملایم */
+        transition: all 0.4s ease;
+        display: flex;
+        align-items: flex-start;
+        height: 100%;
+    }
+
+    .comment-card:hover {
+        border-color: #3b71ed; /* تغییر رنگ لبه به آبی برند شما هنگام هاور */
+        transform: translateY(-8px);
+    }
+
+    .quote-icon {
+        color: #3b71ed;
+        font-size: 30px;
+        margin-left: 15px;
+        opacity: 0.3;
+    }
+
+    .comment-body h6 {
+        color: #3b71ed;
+        font-weight: 800;
+        margin-bottom: 5px;
+        font-size: 1.1rem;
+    }
+
+    .comment-body p {
+        color: #4a5568;
+        font-size: 0.9rem;
+        line-height: 1.7;
+        margin-bottom: 10px;
+    }
+
+    .user-tag {
+        display: inline-block;
+        background: #e0e7ff;
+        color: #3b71ed;
+        padding: 2px 12px;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: bold;
+    }
+</style>
+
+<section class="comments-wrapper">
+    <div class="container">
+        <h3 class="text-center mb-5 fw-bold" style="color: #1a202c;">تجربه کاربران ما</h3>
+        
+        <div class="row g-4">
+            <!-- ردیف اول - ۲ کامنت -->
+            <div class="col-md-6">
+                <div class="comment-card">
+                    <div class="quote-icon">"</div>
+                    <div class="comment-body">
+                        <h6>رضا اسدی</h6>
+                        <p>واقعا فکر نمیکردم پروسه ساخت رزومه اینقدر سریع باشه. تم‌ها عالی و کاربردی هستند.</p>
+                        <span class="user-tag">برنامه‌نویس PHP</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="comment-card">
+                    <div class="quote-icon">"</div>
+                    <div class="comment-body">
+                        <h6>مهسا علوی</h6>
+                        <p>بهترین ویژگی این سایت، خروجی PDF استاندارد و تمیزشه که برای اپلای عالیه.</p>
+                        <span class="user-tag">گرافیک دیزاینر</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ردیف دوم - ۲ کامنت -->
+            <div class="col-md-6">
+                <div class="comment-card">
+                    <div class="quote-icon">"</div>
+                    <div class="comment-body">
+                        <h6>سینا مرادی</h6>
+                        <p>رابط کاربری خیلی روونی داره، حتی با موبایل هم تونستم رزومه‌ام رو ویرایش کنم.</p>
+                        <span class="user-tag">مدیر فروش</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="comment-card">
+                    <div class="quote-icon">"</div>
+                    <div class="comment-body">
+                        <h6>پریسا نوری</h6>
+                        <p>بخش پشتیبانی خیلی سریع جوابم رو دادن. ممنون از تیم خوبتون.</p>
+                        <span class="user-tag">مترجم</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+
 
 <!-- TEMPLATES -->
 <section class="py-24">
