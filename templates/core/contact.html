@@ -1,0 +1,45 @@
+{% extends 'base.html' %}  {% block content %}
+    
+<section class="py-24 bg-gradient-to-b from-slate-50 to-white">
+  <div class="max-w-xl mx-auto px-4">
+    
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-slate-900 mb-4">تماس با ما</h2>
+      <p class="text-slate-500">سوال یا پیشنهادی دارید؟ تیم ما آماده شنیدن نظرات شماست.</p>
+    </div>
+
+    <form class="bg-white p-8 md:p-10 rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/50">
+      
+      <div class="grid md:grid-cols-2 gap-6 mb-6">
+
+        <div>
+          <label class="block text-sm font-medium text-slate-600 mb-2">نام شما</label>
+          <input type="text" 
+            class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none transition-all duration-300 focus:bg-white focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10"
+            placeholder="enter your name">
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-slate-600 mb-2">ایمیل</label>
+          <input type="email" 
+            class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none transition-all duration-300 focus:bg-white focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10"
+            placeholder="email@example.com">
+        </div>
+      </div>
+
+      <div class="mb-8">
+        <label class="block text-sm font-medium text-slate-600 mb-2">پیام شما</label>
+        <textarea rows="4" 
+          class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none transition-all duration-300 focus:bg-white focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10"
+          placeholder="چطور می‌توانیم به شما کمک کنیم؟"></textarea>
+      </div>
+
+      <button class="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition">
+        ارسال پیام
+      </button>
+      
+    </form>
+  </div>
+</section>
+
+{% endblock content %}

@@ -1,20 +1,76 @@
 {% extends 'base.html' %}
 
-{% block title %}
-  داشبورد
-{% endblock %}
-
 {% block content %}
-  <section class="py-16">
-    <div class="max-w-5xl mx-auto px-4">
-      <div class="bg-white border rounded-2xl p-8 shadow-sm">
-        <h1 class="text-3xl font-bold mb-4">سلام {{ request.user.username }} 👋</h1>
-        <p class="text-slate-600 mb-6">به داشبورد رزومه‌ساز خوش اومدی.</p>
-
-        <div class="flex gap-4">
-          <a href="#" class="bg-blue-600 text-white px-5 py-3 rounded-xl hover:bg-blue-700 transition">ساخت رزومه جدید</a>
+    <div class="max-w-6xl mx-auto px-6 py-10">
+        
+        <!-- تیتر داشبورد -->
+        <div class="mb-10 flex justify-between items-end">
+            <div>
+                <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">پنل کاربری</h1>
+                <p class="text-slate-500 mt-2">وضعیت رزومه‌ها و فعالیت‌های اخیر شما</p>
+            </div>
+            <button class="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-200">
+                + ساخت رزومه جدید
+            </button>
         </div>
-      </div>
+
+        <!-- کارت‌های آمار -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="glass-card p-6 rounded-3xl border border-white shadow-xl shadow-slate-200/50 relative overflow-hidden group">
+                <div class="absolute -right-4 -top-4 w-24 h-24 bg-violet-100 rounded-full blur-3xl group-hover:bg-violet-200 transition"></div>
+                <p class="text-slate-500 text-sm font-medium">رزومه‌های ساخته شده</p>
+                <h3 class="text-4xl font-black text-slate-900 mt-2">12</h3>
+            </div>
+
+            <div class="glass-card p-6 rounded-3xl border border-white shadow-xl shadow-slate-200/50 relative overflow-hidden group">
+                <div class="absolute -right-4 -top-4 w-24 h-24 bg-sky-100 rounded-full blur-3xl group-hover:bg-sky-200 transition"></div>
+                <p class="text-slate-500 text-sm font-medium">قالب‌های استفاده شده</p>
+                <h3 class="text-4xl font-black text-slate-900 mt-2">5</h3>
+            </div>
+
+            <div class="glass-card p-6 rounded-3xl border border-white shadow-xl shadow-slate-200/50 relative overflow-hidden group">
+                <div class="absolute -right-4 -top-4 w-24 h-24 bg-emerald-100 rounded-full blur-3xl group-hover:bg-emerald-200 transition"></div>
+                <p class="text-slate-500 text-sm font-medium">تعداد دانلودها</p>
+                <h3 class="text-4xl font-black text-slate-900 mt-2">28</h3>
+            </div>
+        </div>
+
+        <!-- لیست رزومه‌ها -->
+        <div class="bg-white/50 border border-slate-200 rounded-[2rem] p-8 shadow-sm">
+            <div class="flex items-center justify-between mb-8">
+                <h3 class="text-xl font-bold text-slate-900">آخرین رزومه‌ها</h3>
+                <button class="text-sm font-bold text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-full transition">مشاهده همه</button>
+            </div>
+
+            <div class="space-y-4">
+                <div class="flex items-center justify-between p-5 rounded-2xl bg-white border border-slate-100 hover:border-blue-200 hover:shadow-lg transition-all group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-xl group-hover:bg-blue-50 transition">📄</div>
+                        <div>
+                            <h4 class="font-bold text-slate-800">رزومه توسعه‌دهنده بک‌آند</h4>
+                            <p class="text-xs text-slate-400">آخرین ویرایش: ۲ روز پیش</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="text-slate-400 hover:text-blue-600 p-2 transition">👁️</button>
+                        <button class="bg-slate-900 text-white px-6 py-2 rounded-xl text-sm font-bold hover:bg-blue-600 transition-colors">ویرایش</button>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between p-5 rounded-2xl bg-white border border-slate-100 hover:border-blue-200 hover:shadow-lg transition-all group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-xl group-hover:bg-blue-50 transition">🎨</div>
+                        <div>
+                            <h4 class="font-bold text-slate-800">رزومه طراح UI</h4>
+                            <p class="text-xs text-slate-400">آخرین ویرایش: ۱ هفته پیش</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="text-slate-400 hover:text-blue-600 p-2 transition">👁️</button>
+                        <button class="bg-slate-900 text-white px-6 py-2 rounded-xl text-sm font-bold hover:bg-blue-600 transition-colors">ویرایش</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </section>
 {% endblock %}
