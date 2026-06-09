@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{%load static%}
 
 {% block title %}
     خانه | رزومینو
@@ -68,156 +69,202 @@
 
         </div>
 
+</div>
+<style>
+    .comments-wrapper {
+        padding: 60px 0;
+        background-color: #f0f3ff; 
+        direction: rtl;
+    }
+
+    .comment-card {
+        background: linear-gradient(145deg, #ffffff, #f8faff); 
+        border-radius: 25px; 
+        padding: 25px;
+        border: 2px solid #e0e7ff; 
+        box-shadow: 10px 10px 20px #e2e8f0, -10px -10px 20px #ffffff; 
+        transition: all 0.4s ease;
+        display: flex;
+        align-items: flex-start;
+        height: 100%;
+    }
+
+    .comment-card:hover {
+        border-color: #3b71ed; 
+        transform: translateY(-8px);
+    }
+
+    .quote-icon {
+        color: #3b71ed;
+        font-size: 30px;
+        margin-left: 15px;
+        opacity: 0.3;
+    }
+
+    .comment-body h6 {
+        color: #3b71ed;
+        font-weight: 800;
+        margin-bottom: 5px;
+        font-size: 1.1rem;
+    }
+
+    .comment-body p {
+        color: #4a5568;
+        font-size: 0.9rem;
+        line-height: 1.7;
+        margin-bottom: 10px;
+    }
+
+    .user-tag {
+        display: inline-block;
+        background: #e0e7ff;
+        color: #3b71ed;
+        padding: 2px 12px;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: bold;
+    }
+</style>
+
+<section class="comments-wrapper">
+    <div class="container">
+        <h3 class="text-center mb-5 fw-bold" style="color: #1a202c;">تجربه کاربران ما</h3>
+        
+        <div class="row g-4">
+            {% for Comment in comments %}
+            <div class="col-md-6">
+                <div class="comment-card">
+                    <div class="quote-icon">"</div>
+                    <div class="comment-body">
+                        <h6>{{Comment.author.get_full_name}}</h6>
+                        <p>{{Comment.content}}</p>
+                        <span class="user-tag">{{Comment.job}}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+<!-- TEMPLATES -->
+<section class="py-24 bg-slate-50">
+  <div class="max-w-7xl mx-auto px-4">
+
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-4 text-slate-900">
+        انتخاب قالب رزومه
+      </h2>
+      <p class="text-slate-600">
+        از بین قالب‌های حرفه‌ای، مناسب‌ترین گزینه را انتخاب کنید
+      </p>
     </div>
 
-    <section class="py-16 bg-indigo-50">
-        <div class="max-w-6xl mx-auto px-4">
+    <div class="grid md:grid-cols-3 gap-10">
 
-            <h3 class="text-center mb-12 text-3xl font-bold text-slate-900">
-                تجربه کاربران ما
-            </h3>
-
-            <div class="grid md:grid-cols-2 gap-6">
-
-                <div class="bg-gradient-to-br from-white to-indigo-50 rounded-3xl p-6 border-2 border-indigo-100 shadow-lg hover:border-blue-500 hover:-translate-y-2 transition-all duration-300 flex items-start">
-                    <div class="text-blue-600 text-3xl ml-4 opacity-30">"</div>
-                    <div>
-                        <h6 class="text-blue-600 font-extrabold mb-1 text-lg">
-                            رضا اسدی
-                        </h6>
-                        <p class="text-slate-600 text-sm leading-7 mb-3">
-                            واقعا فکر نمیکردم پروسه ساخت رزومه اینقدر سریع باشه. تم‌ها عالی و کاربردی هستند.
-                        </p>
-                        <span class="inline-block bg-indigo-100 text-blue-600 px-3 py-1 rounded-full text-xs font-bold">
-                        برنامه‌نویس PHP
-                    </span>
-                    </div>
-                </div>
-
-                <div class="bg-gradient-to-br from-white to-indigo-50 rounded-3xl p-6 border-2 border-indigo-100 shadow-lg hover:border-blue-500 hover:-translate-y-2 transition-all duration-300 flex items-start">
-                    <div class="text-blue-600 text-3xl ml-4 opacity-30">"</div>
-                    <div>
-                        <h6 class="text-blue-600 font-extrabold mb-1 text-lg">
-                            مهسا علوی
-                        </h6>
-                        <p class="text-slate-600 text-sm leading-7 mb-3">
-                            بهترین ویژگی این سایت، خروجی PDF استاندارد و تمیزشه که برای اپلای عالیه.
-                        </p>
-                        <span class="inline-block bg-indigo-100 text-blue-600 px-3 py-1 rounded-full text-xs font-bold">
-                        گرافیک دیزاینر
-                    </span>
-                    </div>
-                </div>
-
-                <div class="bg-gradient-to-br from-white to-indigo-50 rounded-3xl p-6 border-2 border-indigo-100 shadow-lg hover:border-blue-500 hover:-translate-y-2 transition-all duration-300 flex items-start">
-                    <div class="text-blue-600 text-3xl ml-4 opacity-30">"</div>
-                    <div>
-                        <h6 class="text-blue-600 font-extrabold mb-1 text-lg">
-                            سینا مرادی
-                        </h6>
-                        <p class="text-slate-600 text-sm leading-7 mb-3">
-                            رابط کاربری خیلی روونی داره، حتی با موبایل هم تونستم رزومه‌ام رو ویرایش کنم.
-                        </p>
-                        <span class="inline-block bg-indigo-100 text-blue-600 px-3 py-1 rounded-full text-xs font-bold">
-                        مدیر فروش
-                    </span>
-                    </div>
-                </div>
-
-                <div class="bg-gradient-to-br from-white to-indigo-50 rounded-3xl p-6 border-2 border-indigo-100 shadow-lg hover:border-blue-500 hover:-translate-y-2 transition-all duration-300 flex items-start">
-                    <div class="text-blue-600 text-3xl ml-4 opacity-30">"</div>
-                    <div>
-                        <h6 class="text-blue-600 font-extrabold mb-1 text-lg">
-                            پریسا نوری
-                        </h6>
-                        <p class="text-slate-600 text-sm leading-7 mb-3">
-                            بخش پشتیبانی خیلی سریع جوابم رو دادن. ممنون از تیم خوبتون.
-                        </p>
-                        <span class="inline-block bg-indigo-100 text-blue-600 px-3 py-1 rounded-full text-xs font-bold">
-                        مترجم
-                    </span>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-
-    <!-- TEMPLATES -->
-    <section class="py-24">
-
-        <div class="max-w-6xl mx-auto px-4">
-
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4">
-                    انتخاب قالب رزومه
-                </h2>
-
-                <p class="text-slate-600">
-                    قالب مناسب خودت را انتخاب کن و شروع کن
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition">
-
-                    <img src="https://picsum.photos/400/500?1">
-
-                    <div class="p-6 text-center">
-
-                        <h3 class="font-bold mb-4">
-                            قالب مدرن
-                        </h3>
-
-                        <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
-                            استفاده از قالب
-                        </a>
-
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition">
-
-                    <img src="https://picsum.photos/400/500?2">
-
-                    <div class="p-6 text-center">
-
-                        <h3 class="font-bold mb-4">
-                            قالب حرفه‌ای
-                        </h3>
-
-                        <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
-                            استفاده از قالب
-                        </a>
-
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition">
-
-                    <img src="https://picsum.photos/400/500?3">
-
-                    <div class="p-6 text-center">
-
-                        <h3 class="font-bold mb-4">
-                            قالب مینیمال
-                        </h3>
-
-                        <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
-                            استفاده از قالب
-                        </a>
-
-                    </div>
-                </div>
-
-            </div>
-
+      <!-- Modern -->
+      <div class="bg-white rounded-3xl shadow-md overflow-hidden hover:-translate-y-2 transition duration-300 flex flex-col border border-slate-100">
+        <!-- اضافه کردن پدینگ و پس‌زمینه به محفظه عکس برای نمایش بهتر حاشیه‌های رزومه -->
+        <div class="bg-slate-100 p-4">
+            <img src="{% static 'template/modern.png' %}" alt="قالب مدرن" class="w-full h-[400px] object-cover object-top rounded-xl shadow-sm">
         </div>
 
-    </section>
+        <div class="p-8 text-center flex flex-col flex-1">
+          <h3 class="font-bold text-xl mb-3 text-slate-800">قالب مدرن</h3>
+          <p class="text-slate-500 text-sm mb-6 flex-1">
+            مناسب برنامه‌نویسان و مشاغل فناوری
+          </p>
+          <a href="#" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition shadow-lg shadow-blue-100">
+            استفاده از قالب
+          </a>
+        </div>
+      </div>
+
+      <!-- Professional -->
+      <div class="bg-white rounded-3xl shadow-md overflow-hidden hover:-translate-y-2 transition duration-300 flex flex-col border border-slate-100">
+        <div class="bg-slate-100 p-4">
+            <img src="{% static 'template/professional.png' %}" alt="قالب حرفه‌ای" class="w-full h-[400px] object-cover object-top rounded-xl shadow-sm">
+        </div>
+        <div class="p-8 text-center flex flex-col flex-1">
+          <h3 class="font-bold text-xl mb-3 text-slate-800">قالب حرفه‌ای</h3>
+          <p class="text-slate-500 text-sm mb-6 flex-1">
+            مناسب شرکت‌ها و سازمان‌های رسمی که باعث حرفه ای دیده شدن رزومه شما میشود
+          </p>
+          <a href="#" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition shadow-lg shadow-blue-100">
+            استفاده از قالب
+          </a>
+        </div>
+      </div>
+
+      <!-- Minimal -->
+      <div class="bg-white rounded-3xl shadow-md overflow-hidden hover:-translate-y-2 transition duration-300 flex flex-col border border-slate-100">
+        <div class="bg-slate-100 p-4">
+            <img src="{% static 'template/minimal.png' %}" alt="قالب مینیمال" class="w-full h-[400px] object-cover object-top rounded-xl shadow-sm">
+        </div>
+        <div class="p-8 text-center flex flex-col flex-1">
+          <h3 class="font-bold text-xl mb-3 text-slate-800">قالب مینیمال</h3>
+          <p class="text-slate-500 text-sm mb-6 flex-1">
+            طراحی ساده و خوانایی بالا
+          </p>
+          <a href="#" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition shadow-lg shadow-blue-100">
+            استفاده از قالب
+          </a>
+        </div>
+      </div>
+
+      <!-- Creative -->
+      <div class="bg-white rounded-3xl shadow-md overflow-hidden hover:-translate-y-2 transition duration-300 flex flex-col border border-slate-100">
+        <div class="bg-slate-100 p-4">
+            <img src="{% static 'template/creative.png' %}" alt="قالب خلاقانه" class="w-full h-[400px] object-cover object-top rounded-xl shadow-sm">
+        </div>
+        <div class="p-8 text-center flex flex-col flex-1">
+          <h3 class="font-bold text-xl mb-3 text-slate-800">قالب خلاقانه</h3>
+          <p class="text-slate-500 text-sm mb-6 flex-1">
+             مناسب طراحان و فریلنسرهایی که به دنبال قالبی خلاقانه می‌گردند
+          </p>
+          <a href="#" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition shadow-lg shadow-blue-100">
+            استفاده از قالب
+          </a>
+        </div>
+      </div>
+
+      <!-- Developer -->
+      <div class="bg-white rounded-3xl shadow-md overflow-hidden hover:-translate-y-2 transition duration-300 flex flex-col border border-slate-100">
+        <div class="bg-slate-100 p-4">
+            <img src="{% static 'template/developer.png' %}" alt="قالب برنامه‌نویس" class="w-full h-[400px] object-cover object-top rounded-xl shadow-sm">
+        </div>
+        <div class="p-8 text-center flex flex-col flex-1">
+          <h3 class="font-bold text-xl mb-3 text-slate-800">قالب برنامه‌نویس</h3>
+          <p class="text-slate-500 text-sm mb-6 flex-1">
+            تمرکز بیشتر روی توانایی فرد و پروژه‌های تخصصی
+          </p>
+          <a href="#" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition shadow-lg shadow-blue-100">
+            استفاده از قالب
+          </a>
+        </div>
+      </div>
+
+      <!-- Simple -->
+      <div class="bg-white rounded-3xl shadow-md overflow-hidden hover:-translate-y-2 transition duration-300 flex flex-col border border-slate-100">
+        <div class="bg-slate-100 p-4">
+            <img src="{% static 'template/simple.png' %}" alt="قالب ساده" class="w-full h-[400px] object-cover object-top rounded-xl shadow-sm">
+        </div>
+        <div class="p-8 text-center flex flex-col flex-1">
+          <h3 class="font-bold text-xl mb-3 text-slate-800">قالب ساده</h3>
+          <p class="text-slate-500 text-sm mb-6 flex-1">
+            قالب ساده برای افرادی که به سادگی کار اهمیت بالایی می‌دهند
+          </p>
+          <a href="#" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition shadow-lg shadow-blue-100">
+            استفاده از قالب
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
     <!-- FEATURES -->
     <section class="py-20 bg-slate-50">
