@@ -1,317 +1,282 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  خانه | رزومینو
+    خانه | رزومینو
 {% endblock %}
 
 {% block content %}
-  
-<section class="py-24 relative overflow-hidden">
 
-<div class="absolute top-0 -right-20 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-50"></div>
-<div class="absolute bottom-0 -left-20 w-96 h-96 bg-purple-100 rounded-full blur-3xl opacity-50"></div>
+    <section class="py-24 relative overflow-hidden">
 
-<div class="max-w-6xl mx-auto px-4 text-center relative">
+        <div class="absolute top-0 -right-20 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-50"></div>
+        <div class="absolute bottom-0 -left-20 w-96 h-96 bg-purple-100 rounded-full blur-3xl opacity-50"></div>
 
-<h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6">
-رزومه حرفه‌ای خودت را  
-<br>
-در چند دقیقه بساز
-</h1>
+        <div class="max-w-6xl mx-auto px-4 text-center relative">
 
-<p class="text-lg text-slate-600 max-w-2xl mx-auto mb-10">
-اطلاعاتت را وارد کن، متن‌ها را با هوش مصنوعی بهتر کن و خروجی PDF بگیر.
-</p>
+            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6">
+                رزومه حرفه‌ای خودت را
+                <br>
+                در چند دقیقه بساز
+            </h1>
 
-<div class="flex justify-center gap-4 flex-wrap">
+            <p class="text-lg text-slate-600 max-w-2xl mx-auto mb-10">
+                اطلاعاتت را وارد کن، متن‌ها را با هوش مصنوعی بهتر کن و خروجی PDF بگیر.
+            </p>
 
-<a href="#" class="bg-blue-600 text-white px-8 py-4 rounded-2xl text-lg hover:bg-blue-700 shadow-lg">
-شروع ساخت رزومه
-</a>
+            <div class="flex justify-center gap-4 flex-wrap">
 
-<a href="#" class="border border-blue-600 text-blue-600 px-8 py-4 rounded-2xl text-lg hover:bg-blue-50">
-مشاهده نمونه
-</a>
+                <a href="#" class="bg-blue-600 text-white px-8 py-4 rounded-2xl text-lg hover:bg-blue-700 shadow-lg">
+                    شروع ساخت رزومه
+                </a>
 
-</div>
+                <a href="#" class="border border-blue-600 text-blue-600 px-8 py-4 rounded-2xl text-lg hover:bg-blue-50">
+                    مشاهده نمونه
+                </a>
 
-</div>
-</section>
-
-<!-- STATS -->
-<section class="py-16 bg-violet-50 border-y border-violet-100">
-
-
-<div class="max-w-6xl mx-auto px-4">
-
-<div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-
-<div>
-<h3 class="text-3xl font-bold text-blue-600">12500+</h3>
-<p class="text-slate-600 mt-2">رزومه ساخته شده</p>
-</div>
-
-<div>
-<h3 class="text-3xl font-bold text-blue-600">4.8 ⭐</h3>
-<p class="text-slate-600 mt-2">امتیاز کاربران</p>
-</div>
-
-<div>
-<h3 class="text-3xl font-bold text-blue-600">120+</h3>
-<p class="text-slate-600 mt-2">شرکت استخدام‌کننده</p>
-</div>
-
-<div>
-<h3 class="text-3xl font-bold text-blue-600">8</h3>
-<p class="text-slate-600 mt-2">قالب حرفه‌ای</p>
-</div>
-
-</div>
-
-</div>
-<style>
-    .comments-wrapper {
-        padding: 60px 0;
-        background-color: #f0f3ff; 
-        direction: rtl;
-    }
-
-    .comment-card {
-        background: linear-gradient(145deg, #ffffff, #f8faff); 
-        border-radius: 25px; 
-        padding: 25px;
-        border: 2px solid #e0e7ff; 
-        box-shadow: 10px 10px 20px #e2e8f0, -10px -10px 20px #ffffff; 
-        transition: all 0.4s ease;
-        display: flex;
-        align-items: flex-start;
-        height: 100%;
-    }
-
-    .comment-card:hover {
-        border-color: #3b71ed; 
-        transform: translateY(-8px);
-    }
-
-    .quote-icon {
-        color: #3b71ed;
-        font-size: 30px;
-        margin-left: 15px;
-        opacity: 0.3;
-    }
-
-    .comment-body h6 {
-        color: #3b71ed;
-        font-weight: 800;
-        margin-bottom: 5px;
-        font-size: 1.1rem;
-    }
-
-    .comment-body p {
-        color: #4a5568;
-        font-size: 0.9rem;
-        line-height: 1.7;
-        margin-bottom: 10px;
-    }
-
-    .user-tag {
-        display: inline-block;
-        background: #e0e7ff;
-        color: #3b71ed;
-        padding: 2px 12px;
-        border-radius: 50px;
-        font-size: 0.75rem;
-        font-weight: bold;
-    }
-</style>
-
-<section class="comments-wrapper">
-    <div class="container">
-        <h3 class="text-center mb-5 fw-bold" style="color: #1a202c;">تجربه کاربران ما</h3>
-        
-        <div class="row g-4">
-          
-            <div class="col-md-6">
-                <div class="comment-card">
-                    <div class="quote-icon">"</div>
-                    <div class="comment-body">
-                        <h6>رضا اسدی</h6>
-                        <p>واقعا فکر نمیکردم پروسه ساخت رزومه اینقدر سریع باشه. تم‌ها عالی و کاربردی هستند.</p>
-                        <span class="user-tag">برنامه‌نویس PHP</span>
-                    </div>
-                </div>
             </div>
 
-            <div class="col-md-6">
-                <div class="comment-card">
-                    <div class="quote-icon">"</div>
-                    <div class="comment-body">
-                        <h6>مهسا علوی</h6>
-                        <p>بهترین ویژگی این سایت، خروجی PDF استاندارد و تمیزشه که برای اپلای عالیه.</p>
-                        <span class="user-tag">گرافیک دیزاینر</span>
-                    </div>
-                </div>
-            </div>
-
-          
-            <div class="col-md-6">
-                <div class="comment-card">
-                    <div class="quote-icon">"</div>
-                    <div class="comment-body">
-                        <h6>سینا مرادی</h6>
-                        <p>رابط کاربری خیلی روونی داره، حتی با موبایل هم تونستم رزومه‌ام رو ویرایش کنم.</p>
-                        <span class="user-tag">مدیر فروش</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="comment-card">
-                    <div class="quote-icon">"</div>
-                    <div class="comment-body">
-                        <h6>پریسا نوری</h6>
-                        <p>بخش پشتیبانی خیلی سریع جوابم رو دادن. ممنون از تیم خوبتون.</p>
-                        <span class="user-tag">مترجم</span>
-                    </div>
-                </div>
-            </div>
         </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="py-16 bg-violet-50 border-y border-violet-100">
+
+
+    <div class="max-w-6xl mx-auto px-4">
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+
+            <div>
+                <h3 class="text-3xl font-bold text-blue-600">12500+</h3>
+                <p class="text-slate-600 mt-2">رزومه ساخته شده</p>
+            </div>
+
+            <div>
+                <h3 class="text-3xl font-bold text-blue-600">4.8 ⭐</h3>
+                <p class="text-slate-600 mt-2">امتیاز کاربران</p>
+            </div>
+
+            <div>
+                <h3 class="text-3xl font-bold text-blue-600">120+</h3>
+                <p class="text-slate-600 mt-2">شرکت استخدام‌کننده</p>
+            </div>
+
+            <div>
+                <h3 class="text-3xl font-bold text-blue-600">8</h3>
+                <p class="text-slate-600 mt-2">قالب حرفه‌ای</p>
+            </div>
+
+        </div>
+
     </div>
-</section>
+
+    <section class="py-16 bg-indigo-50">
+        <div class="max-w-6xl mx-auto px-4">
+
+            <h3 class="text-center mb-12 text-3xl font-bold text-slate-900">
+                تجربه کاربران ما
+            </h3>
+
+            <div class="grid md:grid-cols-2 gap-6">
+
+                <div class="bg-gradient-to-br from-white to-indigo-50 rounded-3xl p-6 border-2 border-indigo-100 shadow-lg hover:border-blue-500 hover:-translate-y-2 transition-all duration-300 flex items-start">
+                    <div class="text-blue-600 text-3xl ml-4 opacity-30">"</div>
+                    <div>
+                        <h6 class="text-blue-600 font-extrabold mb-1 text-lg">
+                            رضا اسدی
+                        </h6>
+                        <p class="text-slate-600 text-sm leading-7 mb-3">
+                            واقعا فکر نمیکردم پروسه ساخت رزومه اینقدر سریع باشه. تم‌ها عالی و کاربردی هستند.
+                        </p>
+                        <span class="inline-block bg-indigo-100 text-blue-600 px-3 py-1 rounded-full text-xs font-bold">
+                        برنامه‌نویس PHP
+                    </span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-white to-indigo-50 rounded-3xl p-6 border-2 border-indigo-100 shadow-lg hover:border-blue-500 hover:-translate-y-2 transition-all duration-300 flex items-start">
+                    <div class="text-blue-600 text-3xl ml-4 opacity-30">"</div>
+                    <div>
+                        <h6 class="text-blue-600 font-extrabold mb-1 text-lg">
+                            مهسا علوی
+                        </h6>
+                        <p class="text-slate-600 text-sm leading-7 mb-3">
+                            بهترین ویژگی این سایت، خروجی PDF استاندارد و تمیزشه که برای اپلای عالیه.
+                        </p>
+                        <span class="inline-block bg-indigo-100 text-blue-600 px-3 py-1 rounded-full text-xs font-bold">
+                        گرافیک دیزاینر
+                    </span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-white to-indigo-50 rounded-3xl p-6 border-2 border-indigo-100 shadow-lg hover:border-blue-500 hover:-translate-y-2 transition-all duration-300 flex items-start">
+                    <div class="text-blue-600 text-3xl ml-4 opacity-30">"</div>
+                    <div>
+                        <h6 class="text-blue-600 font-extrabold mb-1 text-lg">
+                            سینا مرادی
+                        </h6>
+                        <p class="text-slate-600 text-sm leading-7 mb-3">
+                            رابط کاربری خیلی روونی داره، حتی با موبایل هم تونستم رزومه‌ام رو ویرایش کنم.
+                        </p>
+                        <span class="inline-block bg-indigo-100 text-blue-600 px-3 py-1 rounded-full text-xs font-bold">
+                        مدیر فروش
+                    </span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-white to-indigo-50 rounded-3xl p-6 border-2 border-indigo-100 shadow-lg hover:border-blue-500 hover:-translate-y-2 transition-all duration-300 flex items-start">
+                    <div class="text-blue-600 text-3xl ml-4 opacity-30">"</div>
+                    <div>
+                        <h6 class="text-blue-600 font-extrabold mb-1 text-lg">
+                            پریسا نوری
+                        </h6>
+                        <p class="text-slate-600 text-sm leading-7 mb-3">
+                            بخش پشتیبانی خیلی سریع جوابم رو دادن. ممنون از تیم خوبتون.
+                        </p>
+                        <span class="inline-block bg-indigo-100 text-blue-600 px-3 py-1 rounded-full text-xs font-bold">
+                        مترجم
+                    </span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
 
 
-<!-- TEMPLATES -->
-<section class="py-24">
+    <!-- TEMPLATES -->
+    <section class="py-24">
 
-<div class="max-w-6xl mx-auto px-4">
+        <div class="max-w-6xl mx-auto px-4">
 
-<div class="text-center mb-16">
-<h2 class="text-4xl font-bold mb-4">
-انتخاب قالب رزومه
-</h2>
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">
+                    انتخاب قالب رزومه
+                </h2>
 
-<p class="text-slate-600">
-قالب مناسب خودت را انتخاب کن و شروع کن
-</p>
-</div>
+                <p class="text-slate-600">
+                    قالب مناسب خودت را انتخاب کن و شروع کن
+                </p>
+            </div>
 
-<div class="grid md:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-3 gap-8">
 
-<div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition">
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition">
 
-<img src="https://picsum.photos/400/500?1">
+                    <img src="https://picsum.photos/400/500?1">
 
-<div class="p-6 text-center">
+                    <div class="p-6 text-center">
 
-<h3 class="font-bold mb-4">
-قالب مدرن
-</h3>
+                        <h3 class="font-bold mb-4">
+                            قالب مدرن
+                        </h3>
 
-<a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
-استفاده از قالب
-</a>
+                        <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+                            استفاده از قالب
+                        </a>
 
-</div>
-</div>
+                    </div>
+                </div>
 
-<div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition">
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition">
 
-<img src="https://picsum.photos/400/500?2">
+                    <img src="https://picsum.photos/400/500?2">
 
-<div class="p-6 text-center">
+                    <div class="p-6 text-center">
 
-<h3 class="font-bold mb-4">
-قالب حرفه‌ای
-</h3>
+                        <h3 class="font-bold mb-4">
+                            قالب حرفه‌ای
+                        </h3>
 
-<a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
-استفاده از قالب
-</a>
+                        <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+                            استفاده از قالب
+                        </a>
 
-</div>
-</div>
+                    </div>
+                </div>
 
-<div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition">
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition">
 
-<img src="https://picsum.photos/400/500?3">
+                    <img src="https://picsum.photos/400/500?3">
 
-<div class="p-6 text-center">
+                    <div class="p-6 text-center">
 
-<h3 class="font-bold mb-4">
-قالب مینیمال
-</h3>
+                        <h3 class="font-bold mb-4">
+                            قالب مینیمال
+                        </h3>
 
-<a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
-استفاده از قالب
-</a>
+                        <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+                            استفاده از قالب
+                        </a>
 
-</div>
-</div>
+                    </div>
+                </div>
 
-</div>
+            </div>
 
-</div>
+        </div>
 
-</section>
+    </section>
 
-<!-- FEATURES -->
-<section class="py-20 bg-slate-50">
+    <!-- FEATURES -->
+    <section class="py-20 bg-slate-50">
 
-<div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-10 text-center">
+        <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-10 text-center">
 
-<div>
-<div class="text-4xl mb-4">⚡</div>
-<h3 class="text-xl font-semibold mb-2">
-ساخت سریع
-</h3>
-<p class="text-slate-600">
-در کمتر از چند دقیقه رزومه بساز
-</p>
-</div>
+            <div>
+                <div class="text-4xl mb-4">⚡</div>
+                <h3 class="text-xl font-semibold mb-2">
+                    ساخت سریع
+                </h3>
+                <p class="text-slate-600">
+                    در کمتر از چند دقیقه رزومه بساز
+                </p>
+            </div>
 
-<div>
-<div class="text-4xl mb-4">🤖</div>
-<h3 class="text-xl font-semibold mb-2">
-بهبود با AI
-</h3>
-<p class="text-slate-600">
-متن رزومه را حرفه‌ای‌تر کن
-</p>
-</div>
+            <div>
+                <div class="text-4xl mb-4">🤖</div>
+                <h3 class="text-xl font-semibold mb-2">
+                    بهبود با AI
+                </h3>
+                <p class="text-slate-600">
+                    متن رزومه را حرفه‌ای‌تر کن
+                </p>
+            </div>
 
-<div>
-<div class="text-4xl mb-4">📄</div>
-<h3 class="text-xl font-semibold mb-2">
-خروجی PDF
-</h3>
-<p class="text-slate-600">
-دانلود و اشتراک لینک رزومه
-</p>
-</div>
+            <div>
+                <div class="text-4xl mb-4">📄</div>
+                <h3 class="text-xl font-semibold mb-2">
+                    خروجی PDF
+                </h3>
+                <p class="text-slate-600">
+                    دانلود و اشتراک لینک رزومه
+                </p>
+            </div>
 
-</div>
+        </div>
 
-</section>
+    </section>
 
-<!-- CTA -->
-<section class="py-24 text-center">
+    <!-- CTA -->
+    <section class="py-24 text-center">
 
-<div class="max-w-3xl mx-auto px-4">
+        <div class="max-w-3xl mx-auto px-4">
 
-<h2 class="text-4xl font-bold mb-6">
-همین حالا رزومه خودت را بساز
-</h2>
+            <h2 class="text-4xl font-bold mb-6">
+                همین حالا رزومه خودت را بساز
+            </h2>
 
-<p class="text-slate-600 mb-10">
-ساخت رزومه کمتر از ۵ دقیقه زمان می‌برد
-</p>
+            <p class="text-slate-600 mb-10">
+                ساخت رزومه کمتر از ۵ دقیقه زمان می‌برد
+            </p>
 
-<a href="#" class="bg-blue-600 text-white px-10 py-4 rounded-2xl text-lg hover:bg-blue-700 shadow-lg">
-شروع رایگان
-</a>
+            <a href="#" class="bg-blue-600 text-white px-10 py-4 rounded-2xl text-lg hover:bg-blue-700 shadow-lg">
+                شروع رایگان
+            </a>
 
-</div>
+        </div>
 
-</section>
+    </section>
 
 {% endblock %}
