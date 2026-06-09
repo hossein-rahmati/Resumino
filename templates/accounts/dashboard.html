@@ -1,76 +1,431 @@
-{% extends 'base.html' %}
+{% extends 'dashboard-base.html' %}
+
+{% block title %}داشبورد | رزومینو{% endblock %}
 
 {% block content %}
-    <div class="max-w-6xl mx-auto px-6 py-10">
-        
-        <!-- تیتر داشبورد -->
-        <div class="mb-10 flex justify-between items-end">
+
+<div class="max-w-7xl mx-auto space-y-8">
+
+    <!-- Top Header -->
+    <section class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-blue-600 via-indigo-600 to-slate-900 p-8 md:p-10 text-white shadow-2xl shadow-blue-200">
+
+        <!-- Decorative Blur -->
+        <div class="absolute -top-20 -left-20 w-72 h-72 bg-cyan-400/30 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-24 right-20 w-72 h-72 bg-purple-500/30 rounded-full blur-3xl"></div>
+
+        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+
             <div>
-                <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">پنل کاربری</h1>
-                <p class="text-slate-500 mt-2">وضعیت رزومه‌ها و فعالیت‌های اخیر شما</p>
-            </div>
-            <button class="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-200">
-                + ساخت رزومه جدید
-            </button>
-        </div>
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 backdrop-blur-xl text-sm mb-5">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    رزومه‌ات آماده دیده شدن توسط شرکت‌هاست
+                </div>
 
-        <!-- کارت‌های آمار -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div class="glass-card p-6 rounded-3xl border border-white shadow-xl shadow-slate-200/50 relative overflow-hidden group">
-                <div class="absolute -right-4 -top-4 w-24 h-24 bg-violet-100 rounded-full blur-3xl group-hover:bg-violet-200 transition"></div>
-                <p class="text-slate-500 text-sm font-medium">رزومه‌های ساخته شده</p>
-                <h3 class="text-4xl font-black text-slate-900 mt-2">12</h3>
-            </div>
+                <h1 class="text-3xl md:text-4xl font-black leading-relaxed">
+                    سلام، وقتشه رزومه‌ات رو حرفه‌ای بسازی 👋
+                </h1>
 
-            <div class="glass-card p-6 rounded-3xl border border-white shadow-xl shadow-slate-200/50 relative overflow-hidden group">
-                <div class="absolute -right-4 -top-4 w-24 h-24 bg-sky-100 rounded-full blur-3xl group-hover:bg-sky-200 transition"></div>
-                <p class="text-slate-500 text-sm font-medium">قالب‌های استفاده شده</p>
-                <h3 class="text-4xl font-black text-slate-900 mt-2">5</h3>
-            </div>
+                <p class="text-blue-100 mt-3 leading-8 max-w-xl">
+                    اطلاعات شخصی، سوابق شغلی، مهارت‌ها و قالب رزومه‌ات رو مدیریت کن و بعداً همین‌جا برای شرکت‌ها ارسالش کن.
+                </p>
 
-            <div class="glass-card p-6 rounded-3xl border border-white shadow-xl shadow-slate-200/50 relative overflow-hidden group">
-                <div class="absolute -right-4 -top-4 w-24 h-24 bg-emerald-100 rounded-full blur-3xl group-hover:bg-emerald-200 transition"></div>
-                <p class="text-slate-500 text-sm font-medium">تعداد دانلودها</p>
-                <h3 class="text-4xl font-black text-slate-900 mt-2">28</h3>
-            </div>
-        </div>
+                <div class="flex flex-wrap gap-3 mt-7">
+                    <a href="#resume-sections"
+                       class="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-white text-blue-700 font-bold hover:bg-blue-50 transition shadow-lg">
+                        <i data-lucide="pen-line" class="w-5 h-5"></i>
+                        تکمیل رزومه
+                    </a>
 
-        <!-- لیست رزومه‌ها -->
-        <div class="bg-white/50 border border-slate-200 rounded-[2rem] p-8 shadow-sm">
-            <div class="flex items-center justify-between mb-8">
-                <h3 class="text-xl font-bold text-slate-900">آخرین رزومه‌ها</h3>
-                <button class="text-sm font-bold text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-full transition">مشاهده همه</button>
+                    <a href="#templates"
+                       class="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-xl text-white font-bold hover:bg-white/20 transition">
+                        <i data-lucide="palette" class="w-5 h-5"></i>
+                        دیدن قالب‌ها
+                    </a>
+                </div>
             </div>
 
-            <div class="space-y-4">
-                <div class="flex items-center justify-between p-5 rounded-2xl bg-white border border-slate-100 hover:border-blue-200 hover:shadow-lg transition-all group">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-xl group-hover:bg-blue-50 transition">📄</div>
-                        <div>
-                            <h4 class="font-bold text-slate-800">رزومه توسعه‌دهنده بک‌آند</h4>
-                            <p class="text-xs text-slate-400">آخرین ویرایش: ۲ روز پیش</p>
-                        </div>
+            <!-- Resume Health Card -->
+            <div class="bg-white/10 border border-white/15 rounded-[2rem] p-6 backdrop-blur-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 class="font-bold text-lg">وضعیت رزومه</h3>
+                        <p class="text-sm text-blue-100 mt-1">هرچقدر کامل‌تر، شانس استخدام بیشتر</p>
                     </div>
-                    <div class="flex gap-2">
-                        <button class="text-slate-400 hover:text-blue-600 p-2 transition">👁️</button>
-                        <button class="bg-slate-900 text-white px-6 py-2 rounded-xl text-sm font-bold hover:bg-blue-600 transition-colors">ویرایش</button>
+                    <div class="w-14 h-14 rounded-2xl bg-white/15 flex items-center justify-center">
+                        <i data-lucide="activity" class="w-7 h-7"></i>
                     </div>
                 </div>
 
-                <div class="flex items-center justify-between p-5 rounded-2xl bg-white border border-slate-100 hover:border-blue-200 hover:shadow-lg transition-all group">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-xl group-hover:bg-blue-50 transition">🎨</div>
-                        <div>
-                            <h4 class="font-bold text-slate-800">رزومه طراح UI</h4>
-                            <p class="text-xs text-slate-400">آخرین ویرایش: ۱ هفته پیش</p>
-                        </div>
+                <div class="mt-6">
+                    <div class="flex items-center justify-between text-sm mb-2">
+                        <span>تکمیل شده</span>
+                        <span class="font-black">۶۵٪</span>
                     </div>
-                    <div class="flex gap-2">
-                        <button class="text-slate-400 hover:text-blue-600 p-2 transition">👁️</button>
-                        <button class="bg-slate-900 text-white px-6 py-2 rounded-xl text-sm font-bold hover:bg-blue-600 transition-colors">ویرایش</button>
+                    <div class="h-3 rounded-full bg-white/10 overflow-hidden">
+                        <div class="h-full w-[65%] rounded-full bg-gradient-to-l from-emerald-300 to-cyan-300"></div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-3 mt-6">
+                    <div class="rounded-2xl bg-white/10 p-4 text-center">
+                        <p class="text-2xl font-black">۳</p>
+                        <p class="text-xs text-blue-100 mt-1">بازدید</p>
+                    </div>
+                    <div class="rounded-2xl bg-white/10 p-4 text-center">
+                        <p class="text-2xl font-black">۱</p>
+                        <p class="text-xs text-blue-100 mt-1">ارسال</p>
+                    </div>
+                    <div class="rounded-2xl bg-white/10 p-4 text-center">
+                        <p class="text-2xl font-black">۲</p>
+                        <p class="text-xs text-blue-100 mt-1">پیشنهاد</p>
                     </div>
                 </div>
             </div>
+
         </div>
-    </div>
-{% endblock %}
+    </section>
+
+
+    <!-- Quick Stats -->
+    <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+
+        <div class="bg-white rounded-[1.7rem] p-5 border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-slate-500">بازدید شرکت‌ها</p>
+                    <h3 class="text-3xl font-black text-slate-900 mt-2">۳</h3>
+                </div>
+                <div class="w-13 h-13 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                    <i data-lucide="eye" class="w-6 h-6"></i>
+                </div>
+            </div>
+            <p class="text-xs text-emerald-600 mt-4 flex items-center gap-1">
+                <i data-lucide="trending-up" class="w-4 h-4"></i>
+                ۲ بازدید نسبت به هفته قبل بیشتر
+            </p>
+        </div>
+
+        <div class="bg-white rounded-[1.7rem] p-5 border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-slate-500">وضعیت آخرین ارسال</p>
+                    <h3 class="text-xl font-black text-slate-900 mt-2">در حال بررسی</h3>
+                </div>
+                <div class="w-13 h-13 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center">
+                    <i data-lucide="clock-3" class="w-6 h-6"></i>
+                </div>
+            </div>
+            <p class="text-xs text-slate-400 mt-4">آخرین آپدیت: امروز</p>
+        </div>
+
+        <div class="bg-white rounded-[1.7rem] p-5 border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-slate-500">قالب انتخابی</p>
+                    <h3 class="text-xl font-black text-slate-900 mt-2">Modern</h3>
+                </div>
+                <div class="w-13 h-13 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center">
+                    <i data-lucide="layout-template" class="w-6 h-6"></i>
+                </div>
+            </div>
+            <p class="text-xs text-slate-400 mt-4">قابل تغییر در بخش قالب‌ها</p>
+        </div>
+
+        <div class="bg-white rounded-[1.7rem] p-5 border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-slate-500">امتیاز رزومه</p>
+                    <h3 class="text-3xl font-black text-slate-900 mt-2">۷۲</h3>
+                </div>
+                <div class="w-13 h-13 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                    <i data-lucide="badge-check" class="w-6 h-6"></i>
+                </div>
+            </div>
+            <p class="text-xs text-blue-600 mt-4">با افزودن پروژه‌ها بهتر می‌شود</p>
+        </div>
+
+    </section>
+
+
+    <!-- Main Grid -->
+    <section class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+
+        <!-- Resume Sections -->
+        <div id="resume-sections" class="xl:col-span-2 space-y-6">
+
+            <div class="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6 md:p-7">
+
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-7">
+                    <div>
+                        <h2 class="text-2xl font-black text-slate-900 flex items-center gap-3">
+                            <span class="w-11 h-11 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                                <i data-lucide="layers-3" class="w-6 h-6"></i>
+                            </span>
+                            بخش‌های رزومه
+                        </h2>
+                        <p class="text-sm text-slate-500 mt-2">
+                            اطلاعاتت را مرحله‌به‌مرحله کامل کن.
+                        </p>
+                    </div>
+
+                    <button class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-slate-900 text-white font-bold hover:bg-blue-700 transition">
+                        <i data-lucide="plus" class="w-5 h-5"></i>
+                        افزودن بخش
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                    <!-- Personal Info -->
+                    <div class="group relative overflow-hidden rounded-[1.5rem] border border-slate-100 bg-gradient-to-br from-white to-blue-50/40 p-5 hover:shadow-xl hover:-translate-y-1 transition">
+                        <div class="absolute -left-10 -bottom-10 w-28 h-28 bg-blue-200/40 rounded-full blur-2xl"></div>
+
+                        <div class="relative flex items-start justify-between gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-lg shadow-blue-100">
+                                <i data-lucide="user" class="w-6 h-6"></i>
+                            </div>
+                            <span class="text-xs px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 font-bold">تکمیل شده</span>
+                        </div>
+
+                        <div class="relative mt-5">
+                            <h3 class="font-black text-slate-900 text-lg">اطلاعات شخصی</h3>
+                            <p class="text-sm text-slate-500 mt-2 leading-7">
+                                نام، عنوان شغلی، ایمیل، شماره تماس، شهر و لینک‌ها
+                            </p>
+
+                            <div class="flex items-center justify-between mt-5">
+                                <a href="#" class="inline-flex items-center gap-2 text-blue-700 font-bold text-sm">
+                                    ویرایش
+                                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                                </a>
+                                <span class="text-xs text-slate-400">ضروری</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Work Experience -->
+                    <div class="group relative overflow-hidden rounded-[1.5rem] border border-slate-100 bg-gradient-to-br from-white to-purple-50/40 p-5 hover:shadow-xl hover:-translate-y-1 transition">
+                        <div class="absolute -left-10 -bottom-10 w-28 h-28 bg-purple-200/40 rounded-full blur-2xl"></div>
+
+                        <div class="relative flex items-start justify-between gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-purple-600 text-white flex items-center justify-center shadow-lg shadow-purple-100">
+                                <i data-lucide="briefcase-business" class="w-6 h-6"></i>
+                            </div>
+                            <span class="text-xs px-3 py-1 rounded-full bg-amber-50 text-amber-600 font-bold">نیاز به تکمیل</span>
+                        </div>
+
+                        <div class="relative mt-5">
+                            <h3 class="font-black text-slate-900 text-lg">سوابق شغلی</h3>
+                            <p class="text-sm text-slate-500 mt-2 leading-7">
+                                تجربه‌های کاری، شرکت‌ها، سمت و مسئولیت‌ها
+                            </p>
+
+                            <div class="flex items-center justify-between mt-5">
+                                <a href="#" class="inline-flex items-center gap-2 text-purple-700 font-bold text-sm">
+                                    مدیریت لیست
+                                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                                </a>
+                                <span class="text-xs text-slate-400">خیلی مهم</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="group relative overflow-hidden rounded-[1.5rem] border border-slate-100 bg-gradient-to-br from-white to-emerald-50/40 p-5 hover:shadow-xl hover:-translate-y-1 transition">
+                        <div class="absolute -left-10 -bottom-10 w-28 h-28 bg-emerald-200/40 rounded-full blur-2xl"></div>
+
+                        <div class="relative flex items-start justify-between gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shadow-lg shadow-emerald-100">
+                                <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                            </div>
+                            <span class="text-xs px-3 py-1 rounded-full bg-slate-100 text-slate-500 font-bold">اختیاری</span>
+                        </div>
+
+                        <div class="relative mt-5">
+                            <h3 class="font-black text-slate-900 text-lg">تحصیلات</h3>
+                            <p class="text-sm text-slate-500 mt-2 leading-7">
+                                دانشگاه، رشته، مقطع، سال شروع و پایان
+                            </p>
+
+                            <div class="flex items-center justify-between mt-5">
+                                <a href="#" class="inline-flex items-center gap-2 text-emerald-700 font-bold text-sm">
+                                    افزودن تحصیلات
+                                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                                </a>
+                                <span class="text-xs text-slate-400">پیشنهادی</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skills -->
+                    <div class="group relative overflow-hidden rounded-[1.5rem] border border-slate-100 bg-gradient-to-br from-white to-orange-50/40 p-5 hover:shadow-xl hover:-translate-y-1 transition">
+                        <div class="absolute -left-10 -bottom-10 w-28 h-28 bg-orange-200/40 rounded-full blur-2xl"></div>
+
+                        <div class="relative flex items-start justify-between gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-orange-500 text-white flex items-center justify-center shadow-lg shadow-orange-100">
+                                <i data-lucide="code-2" class="w-6 h-6"></i>
+                            </div>
+                            <span class="text-xs px-3 py-1 rounded-full bg-blue-50 text-blue-600 font-bold">۲ مهارت</span>
+                        </div>
+
+                        <div class="relative mt-5">
+                            <h3 class="font-black text-slate-900 text-lg">مهارت‌ها</h3>
+                            <div class="flex flex-wrap gap-2 mt-3">
+                                <span class="px-3 py-1.5 rounded-xl bg-white border border-slate-100 text-xs font-bold text-slate-600">Python</span>
+                                <span class="px-3 py-1.5 rounded-xl bg-white border border-slate-100 text-xs font-bold text-slate-600">Django</span>
+                            </div>
+
+                            <div class="flex items-center justify-between mt-5">
+                                <a href="#" class="inline-flex items-center gap-2 text-orange-600 font-bold text-sm">
+                                    ویرایش مهارت‌ها
+                                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                                </a>
+                                <span class="text-xs text-slate-400">مهم</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Company Review Timeline -->
+            <div class="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6 md:p-7">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h2 class="text-2xl font-black text-slate-900 flex items-center gap-3">
+                            <span class="w-11 h-11 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center">
+                                <i data-lucide="route" class="w-6 h-6"></i>
+                            </span>
+                            وضعیت بررسی رزومه
+                        </h2>
+                        <p class="text-sm text-slate-500 mt-2">
+                            بعداً شرکت‌ها می‌توانند از همین‌جا وضعیت رزومه را مشخص کنند.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+
+                    <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center">
+                            <i data-lucide="send" class="w-6 h-6"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-slate-900">ارسال رزومه برای شرکت</h3>
+                            <p class="text-sm text-slate-500 mt-1">رزومه شما برای موقعیت برنامه‌نویس Django ارسال شد.</p>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold">ارسال شده</span>
+                    </div>
+
+                    <div class="flex items-center gap-4 p-4 rounded-2xl bg-amber-50 border border-amber-100">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500 text-white flex items-center justify-center">
+                            <i data-lucide="loader-circle" class="w-6 h-6"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-slate-900">در حال بررسی توسط شرکت</h3>
+                            <p class="text-sm text-slate-500 mt-1">شرکت رزومه را مشاهده کرده و در مرحله بررسی اولیه است.</p>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-700 text-xs font-bold">در حال بررسی</span>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Left Column -->
+        <div class="space-y-6">
+
+            <!-- Template Preview -->
+            <div id="templates" class="bg-white rounded-[2rem] border border-slate-100 shadow-sm overflow-hidden">
+
+                <div class="p-6 border-b border-slate-100">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="font-black text-xl text-slate-900">قالب رزومه</h2>
+                            <p class="text-sm text-slate-500 mt-1">ظاهر رزومه‌ای که شرکت‌ها می‌بینند</p>
+                        </div>
+                        <div class="w-11 h-11 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center">
+                            <i data-lucide="palette" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6">
+                    <div class="relative rounded-[1.5rem] overflow-hidden bg-gradient-to-br from-slate-900 to-blue-900 p-5 min-h-[230px] text-white shadow-xl">
+                        <div class="absolute -left-10 -bottom-10 w-32 h-32 bg-blue-500/50 rounded-full blur-3xl"></div>
+                        <div class="absolute top-5 left-5 w-20 h-20 bg-purple-400/30 rounded-full blur-2xl"></div>
+
+                        <div class="relative bg-white rounded-2xl p-4 text-slate-900 w-[78%] shadow-2xl">
+                            <div class="h-4 w-24 rounded-full bg-blue-600 mb-4"></div>
+                            <div class="space-y-2">
+                                <div class="h-2 rounded-full bg-slate-200"></div>
+                                <div class="h-2 rounded-full bg-slate-200 w-2/3"></div>
+                                <div class="h-2 rounded-full bg-slate-200 w-4/5"></div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 mt-5">
+                                <div class="h-12 rounded-xl bg-blue-50"></div>
+                                <div class="h-12 rounded-xl bg-slate-100"></div>
+                            </div>
+                        </div>
+
+                        <div class="relative mt-5">
+                            <h3 class="font-black">قالب فعلی: Modern</h3>
+                            <p class="text-xs text-blue-100 mt-1">مناسب شرکت‌های تکنولوژی و استارتاپ‌ها</p>
+                        </div>
+                    </div>
+
+                    <button class="w-full mt-5 py-3.5 rounded-2xl bg-slate-900 text-white font-bold hover:bg-blue-700 transition flex items-center justify-center gap-2">
+                        <i data-lucide="shuffle" class="w-5 h-5"></i>
+                        تغییر قالب رزومه
+                    </button>
+                </div>
+
+            </div>
+
+
+            <!-- Suggested Jobs -->
+            <div class="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6">
+
+                <div class="flex items-center justify-between mb-5">
+                    <div>
+                        <h2 class="font-black text-xl text-slate-900">فرصت‌های پیشنهادی</h2>
+                        <p class="text-sm text-slate-500 mt-1">براساس مهارت‌های شما</p>
+                    </div>
+                    <div class="w-11 h-11 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                        <i data-lucide="briefcase" class="w-6 h-6"></i>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+
+                    <div class="group p-4 rounded-2xl border border-slate-100 hover:border-blue-100 hover:bg-blue-50/40 transition cursor-pointer">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center font-black">
+                                D
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-slate-900">برنامه‌نویس Django</h3>
+                                <p class="text-xs text-slate-500 mt-1">شرکت دیجی‌کالا</p>
+                            </div>
+                            <i data-lucide="chevron-left" class="w-5 h-5 text-slate-300 group-hover:text-blue-600"></i>
+                        </div>
+                    </div>
+
+                    <div class="group p-4 rounded-2xl border border-slate-100 hover:border-blue-100 hover:bg-blue-50/40 transition cursor-pointer">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center font-black">
+                                S
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-slate-900">توسعه‌دهنده Frontend</h3>
+                                <p class="text-xs text-slate-500 mt-1">اسنپ</p>
+                            </div>
+                            <i data-lucide="chevron-left" class="w-5 h-5 text-slate-300 group-hover:text-blue-600"></i>
+                        </div>
+                    </
+
+{% endblock content %}
