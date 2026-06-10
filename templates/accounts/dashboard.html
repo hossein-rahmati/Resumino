@@ -22,7 +22,7 @@
                 </div>
 
                 <h1 class="text-3xl md:text-4xl font-black leading-relaxed">
-                    سلام، وقتشه رزومه‌ات رو حرفه‌ای بسازی 👋
+                    سلام، وقتشه رزومه‌ات رو حرفه‌ای بسازی 
                 </h1>
 
                 <p class="text-blue-100 mt-3 leading-8 max-w-xl">
@@ -505,20 +505,43 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ارسال پیام
-    chatForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const text = userInput.value.trim();
-        if (!text) return;
+    chatForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const text = userInput.value.trim();
+    if (!text) return;
 
-        // اضافه کردن پیام کاربر به صفحه
-        addMessage(text, 'user');
-        userInput.value = '';
+    addMessage(text, 'user');
+    userInput.value = '';
 
-        // شبیه‌سازی پاسخ هوش مصنوعی (در فاز بعد به API وصل می‌شود)
-        setTimeout(() => {
-            addMessage("در حال تحلیل درخواست شما... (در فاز بعدی به هوش مصنوعی متصل می‌شوم)", 'ai');
-        }, 800);
-    });
+    // نمایش وضعیت "در حال تایپ..."
+    const loadingDiv = document.createElement('div');
+    loadingDiv.id = 'ai-loading';
+    loadingDiv.innerHTML = '<p class="text-xs text-slate-400 p-2">در حال فکر کردن...</p>';
+    chatMessages.appendChild(loadingDiv);
+
+    try {
+        // ارسال پیام به سرور جنگو
+        const response = await fetch('/api/ai-coach/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // 'X-CSRFToken': getCookie('csrftoken') // اگر نیاز به امنیت CSRF داشتی
+            },
+            body: JSON.stringify({ message: text })
+        });
+
+        const data = await response.json();
+        
+        // حذف وضعیت لودینگ و نمایش جواب واقعی
+        document.getElementById('ai-loading').remove();
+        addMessage(data.reply, 'ai');
+
+    } catch (error) {
+        document.getElementById('ai-loading').remove();
+        addMessage("خطا در برقراری ارتباط با سرور.", 'ai');
+    }
+});
+
 
     function addMessage(text, sender) {
         const div = document.createElement('div');
