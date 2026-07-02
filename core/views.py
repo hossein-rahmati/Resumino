@@ -17,6 +17,8 @@ def about_view(request):
     return render(request,'core/about.html')
 def contact_view(request):
     return render(request,'core/contact.html')
+
+
 client = Groq(api_key="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")
 try:
     completion = client.chat.completions.create(
@@ -39,7 +41,7 @@ def ai_resume_coach(request):
                 messages=[
                     {
                         "role": "system",
-                        "content": "تو 'مربی هوشمند رزومینو' هستی. وظیفه تو تحلیل رزومه و مشاوره شغلی به کاربران است. به فارسی پاسخ بده و بسیار صمیمی و حرفه‌ای باش."
+                        "content": "تو 'مربی هوشمند رزومینو' هستی. وظیفه تو تحلیل رزومه و مشاوره شغلی به کاربران است. به فارسی پاسخ بده و بسیار صمیمی و حرفه‌ای باش. "
                     },
                     {"role": "user", "content": user_message}
                 ],
