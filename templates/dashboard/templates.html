@@ -1,0 +1,128 @@
+{% extends 'dashboard-base.html' %}
+{% load static %}
+
+{% block title %}قالب های رزومه | رزومینو{% endblock %}
+
+{% block page_title %}قالب های رزومه{% endblock %}
+
+{% block content %}
+
+<div class="max-w-7xl mx-auto space-y-8">
+
+    <!-- Header -->
+    <section
+        class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-purple-600 via-pink-600 to-slate-900 p-8 md:p-10 text-white shadow-2xl shadow-purple-200">
+        <div class="absolute -top-20 -left-20 w-72 h-72 bg-pink-400/30 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-24 right-20 w-72 h-72 bg-indigo-500/30 rounded-full blur-3xl"></div>
+        <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div>
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 backdrop-blur-xl text-sm mb-4">
+                    <i data-lucide="palette" class="w-4 h-4"></i>
+                    قالب‌های رزومه
+                </div>
+                <h1 class="text-3xl md:text-4xl font-black leading-relaxed">
+                    قالب مناسب خود را انتخاب کنید
+                </h1>
+                <p class="text-blue-100 mt-3 leading-8 max-w-xl">
+                    با انتخاب قالب حرفه‌ای، رزومه‌تان را متمایز کنید.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فیلتر دسته‌بندی -->
+    <div class="flex flex-wrap gap-3">
+        <button class="px-5 py-2 rounded-xl bg-blue-600 text-white font-bold text-sm">همه</button>
+        <button
+            class="px-5 py-2 rounded-xl bg-white border border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50">مینیمال</button>
+        <button
+            class="px-5 py-2 rounded-xl bg-white border border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50">مدرن</button>
+        <button
+            class="px-5 py-2 rounded-xl bg-white border border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50">کلاسیک</button>
+        <button
+            class="px-5 py-2 rounded-xl bg-white border border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50">دوستونه</button>
+    </div>
+
+    <!-- گالری قالب‌ها -->
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- قالب ۱ -->
+        <div
+            class="bg-white rounded-[2rem] border border-slate-100 shadow-sm overflow-hidden hover:shadow-xl hover:-translate-y-1 transition cursor-pointer group">
+            <div class="h-48 bg-gradient-to-br from-blue-500 to-indigo-600 p-6 flex items-center justify-center">
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 w-full text-white">
+                    <div class="h-3 w-20 rounded-full bg-white/40 mb-3"></div>
+                    <div class="h-2 w-full rounded-full bg-white/20 mb-2"></div>
+                    <div class="h-2 w-3/4 rounded-full bg-white/20 mb-2"></div>
+                    <div class="h-2 w-1/2 rounded-full bg-white/20"></div>
+                </div>
+            </div>
+            <div class="p-5">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="font-black text-slate-900">Modern Blue</h3>
+                        <p class="text-xs text-slate-400">مناسب برای تکنولوژی</p>
+                    </div>
+                    <span class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-bold">محبوب</span>
+                </div>
+                <button
+                    class="w-full mt-4 py-2.5 rounded-xl bg-slate-900 text-white font-bold text-sm hover:bg-blue-600 transition">انتخاب
+                    قالب</button>
+            </div>
+        </div>
+
+        <!-- قالب ۲ -->
+        <div
+            class="bg-white rounded-[2rem] border border-slate-100 shadow-sm overflow-hidden hover:shadow-xl hover:-translate-y-1 transition cursor-pointer group">
+            <div class="h-48 bg-gradient-to-br from-emerald-500 to-teal-600 p-6 flex items-center justify-center">
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 w-full text-white">
+                    <div class="h-3 w-20 rounded-full bg-white/40 mb-3"></div>
+                    <div class="h-2 w-full rounded-full bg-white/20 mb-2"></div>
+                    <div class="h-2 w-3/4 rounded-full bg-white/20 mb-2"></div>
+                    <div class="h-2 w-1/2 rounded-full bg-white/20"></div>
+                </div>
+            </div>
+            <div class="p-5">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="font-black text-slate-900">Minimal Green</h3>
+                        <p class="text-xs text-slate-400">ساده و شیک</p>
+                    </div>
+                    <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold">جدید</span>
+                </div>
+                <button
+                    class="w-full mt-4 py-2.5 rounded-xl bg-slate-900 text-white font-bold text-sm hover:bg-blue-600 transition">انتخاب
+                    قالب</button>
+            </div>
+        </div>
+
+        <!-- قالب ۳ -->
+        <div
+            class="bg-white rounded-[2rem] border border-slate-100 shadow-sm overflow-hidden hover:shadow-xl hover:-translate-y-1 transition cursor-pointer group">
+            <div class="h-48 bg-gradient-to-br from-orange-500 to-red-600 p-6 flex items-center justify-center">
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 w-full text-white">
+                    <div class="h-3 w-20 rounded-full bg-white/40 mb-3"></div>
+                    <div class="h-2 w-full rounded-full bg-white/20 mb-2"></div>
+                    <div class="h-2 w-3/4 rounded-full bg-white/20 mb-2"></div>
+                    <div class="h-2 w-1/2 rounded-full bg-white/20"></div>
+                </div>
+            </div>
+            <div class="p-5">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="font-black text-slate-900">Creative Orange</h3>
+                        <p class="text-xs text-slate-400">مناسب برای طراحی و هنر</p>
+                    </div>
+                </div>
+                <button
+                    class="w-full mt-4 py-2.5 rounded-xl bg-slate-900 text-white font-bold text-sm hover:bg-blue-600 transition">انتخاب
+                    قالب</button>
+            </div>
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock content %}

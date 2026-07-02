@@ -1,0 +1,138 @@
+{% extends 'dashboard-base.html' %}
+{% load static %}
+
+{% block title %}فرصت های شغلی | رزومینو{% endblock %}
+
+{% block page_title %}فرصت های شغلی{% endblock %}
+
+
+
+{% block content %}
+
+<div class="max-w-7xl mx-auto space-y-8">
+
+    <!-- Header -->
+    <section
+        class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-emerald-600 via-teal-600 to-slate-900 p-8 md:p-10 text-white shadow-2xl shadow-emerald-200">
+        <div class="absolute -top-20 -left-20 w-72 h-72 bg-teal-400/30 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-24 right-20 w-72 h-72 bg-emerald-500/30 rounded-full blur-3xl"></div>
+        <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div>
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 backdrop-blur-xl text-sm mb-4">
+                    <i data-lucide="briefcase" class="w-4 h-4"></i>
+                    فرصت‌های شغلی
+                </div>
+                <h1 class="text-3xl md:text-4xl font-black leading-relaxed">
+                    بهترین فرصت‌های شغلی را پیدا کنید
+                </h1>
+                <p class="text-blue-100 mt-3 leading-8 max-w-xl">
+                    بر اساس مهارت‌ها و سابقه‌تان، شرکت‌ها به شما پیشنهاد می‌دهند.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- جستجو و فیلتر -->
+    <div class="flex flex-col md:flex-row gap-4">
+        <input type="text" placeholder="جستجوی شغل، شرکت یا مهارت..."
+            class="flex-1 px-5 py-3.5 bg-white border border-slate-200 rounded-2xl text-sm focus:border-blue-400 focus:ring-4 focus:ring-blue-100/70 transition outline-none shadow-sm">
+        <button
+            class="px-6 py-3.5 rounded-2xl bg-blue-600 text-white font-bold hover:bg-blue-700 transition">جستجو</button>
+    </div>
+
+    <!-- لیست فرصت‌ها -->
+    <section class="space-y-4">
+
+        <!-- شغل ۱ -->
+        <div class="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6 hover:shadow-md transition">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center font-black text-xl">
+                        D</div>
+                    <div>
+                        <h3 class="text-xl font-black text-slate-900">برنامه‌نویس ارشد Django</h3>
+                        <p class="text-sm text-slate-500">شرکت دیجی‌کالا • تهران، ایران</p>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <span class="px-3 py-1 rounded-xl bg-blue-50 text-blue-600 text-xs font-bold">دورکاری</span>
+                            <span
+                                class="px-3 py-1 rounded-xl bg-emerald-50 text-emerald-600 text-xs font-bold">تمام‌وقت</span>
+                            <span class="px-3 py-1 rounded-xl bg-amber-50 text-amber-600 text-xs font-bold">حقوق
+                                رقابتی</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <a href="#"
+                        class="px-5 py-2.5 rounded-xl bg-blue-600 text-white font-bold text-sm hover:bg-blue-700 transition">مشاهده
+                        و ارسال</a>
+                    <button class="p-2.5 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition">
+                        <i data-lucide="heart" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- شغل ۲ -->
+        <div class="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6 hover:shadow-md transition">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center font-black text-xl">
+                        S</div>
+                    <div>
+                        <h3 class="text-xl font-black text-slate-900">توسعه‌دهنده Frontend (React)</h3>
+                        <p class="text-sm text-slate-500">شرکت اسنپ • تهران، ایران</p>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <span class="px-3 py-1 rounded-xl bg-blue-50 text-blue-600 text-xs font-bold">دورکاری</span>
+                            <span
+                                class="px-3 py-1 rounded-xl bg-emerald-50 text-emerald-600 text-xs font-bold">پاره‌وقت</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <a href="#"
+                        class="px-5 py-2.5 rounded-xl bg-blue-600 text-white font-bold text-sm hover:bg-blue-700 transition">مشاهده
+                        و ارسال</a>
+                    <button class="p-2.5 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition">
+                        <i data-lucide="heart" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- شغل ۳ -->
+        <div class="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6 hover:shadow-md transition">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center font-black text-xl">
+                        Z</div>
+                    <div>
+                        <h3 class="text-xl font-black text-slate-900">مدیر محصول دیجیتال</h3>
+                        <p class="text-sm text-slate-500">استارتاپ زرین‌پال • تهران، ایران</p>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <span
+                                class="px-3 py-1 rounded-xl bg-emerald-50 text-emerald-600 text-xs font-bold">تمام‌وقت</span>
+                            <span class="px-3 py-1 rounded-xl bg-amber-50 text-amber-600 text-xs font-bold">حقوق
+                                عالی</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <a href="#"
+                        class="px-5 py-2.5 rounded-xl bg-blue-600 text-white font-bold text-sm hover:bg-blue-700 transition">مشاهده
+                        و ارسال</a>
+                    <button class="p-2.5 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition">
+                        <i data-lucide="heart" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock content %}

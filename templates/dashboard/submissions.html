@@ -1,0 +1,130 @@
+{% extends 'dashboard-base.html' %}
+{% load static %}
+
+
+{% block title %}ارسال های من | رزومینو{% endblock %}
+
+{% block page_title %}ارسال های من {% endblock %}
+
+{% block content %}
+
+<div class="max-w-7xl mx-auto space-y-8">
+
+    <!-- Header -->
+    <section
+        class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-amber-600 via-orange-600 to-slate-900 p-8 md:p-10 text-white shadow-2xl shadow-amber-200">
+        <div class="absolute -top-20 -left-20 w-72 h-72 bg-orange-400/30 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-24 right-20 w-72 h-72 bg-amber-500/30 rounded-full blur-3xl"></div>
+        <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div>
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 backdrop-blur-xl text-sm mb-4">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    ارسال‌های من
+                </div>
+                <h1 class="text-3xl md:text-4xl font-black leading-relaxed">
+                    وضعیت ارسال‌های خود را پیگیری کنید
+                </h1>
+                <p class="text-blue-100 mt-3 leading-8 max-w-xl">
+                    رزومه‌هایی که برای شرکت‌ها ارسال کرده‌اید را مدیریت کنید.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- آمار ارسال‌ها -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="bg-white rounded-[1.7rem] p-5 border border-slate-100 shadow-sm">
+            <p class="text-sm text-slate-500">کل ارسال‌ها</p>
+            <h3 class="text-3xl font-black text-slate-900">۱۲</h3>
+        </div>
+        <div class="bg-white rounded-[1.7rem] p-5 border border-slate-100 shadow-sm">
+            <p class="text-sm text-slate-500">در حال بررسی</p>
+            <h3 class="text-3xl font-black text-amber-600">۵</h3>
+        </div>
+        <div class="bg-white rounded-[1.7rem] p-5 border border-slate-100 shadow-sm">
+            <p class="text-sm text-slate-500">پذیرفته شده</p>
+            <h3 class="text-3xl font-black text-emerald-600">۳</h3>
+        </div>
+        <div class="bg-white rounded-[1.7rem] p-5 border border-slate-100 shadow-sm">
+            <p class="text-sm text-slate-500">رد شده</p>
+            <h3 class="text-3xl font-black text-red-600">۴</h3>
+        </div>
+    </div>
+
+    <!-- لیست ارسال‌ها -->
+    <section class="space-y-4">
+
+        <!-- ارسال ۱ -->
+        <div class="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6 hover:shadow-md transition">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-3">
+                        <h3 class="text-xl font-black text-slate-900">برنامه‌نویس ارشد Django</h3>
+                        <span class="px-3 py-1 rounded-full bg-amber-50 text-amber-600 text-xs font-bold">در حال
+                            بررسی</span>
+                    </div>
+                    <p class="text-sm text-slate-500 mt-1">ارسال شده به دیجی‌کالا • ۲ روز پیش</p>
+                    <p class="text-xs text-slate-400 mt-2">رزومه: Modern Blue</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <a href="#"
+                        class="px-5 py-2.5 rounded-xl bg-blue-50 text-blue-600 font-bold text-sm hover:bg-blue-100 transition">مشاهده
+                        وضعیت</a>
+                    <button class="p-2.5 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition">
+                        <i data-lucide="more-vertical" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ارسال ۲ -->
+        <div class="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6 hover:shadow-md transition">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-3">
+                        <h3 class="text-xl font-black text-slate-900">توسعه‌دهنده Frontend (React)</h3>
+                        <span class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-bold">پذیرفته
+                            شده</span>
+                    </div>
+                    <p class="text-sm text-slate-500 mt-1">ارسال شده به اسنپ • ۱ هفته پیش</p>
+                    <p class="text-xs text-slate-400 mt-2">رزومه: Minimal Green</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <a href="#"
+                        class="px-5 py-2.5 rounded-xl bg-emerald-50 text-emerald-600 font-bold text-sm hover:bg-emerald-100 transition">مشاهده
+                        وضعیت</a>
+                    <button class="p-2.5 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition">
+                        <i data-lucide="more-vertical" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ارسال ۳ -->
+        <div class="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6 hover:shadow-md transition">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-3">
+                        <h3 class="text-xl font-black text-slate-900">مدیر محصول دیجیتال</h3>
+                        <span class="px-3 py-1 rounded-full bg-red-50 text-red-600 text-xs font-bold">رد شده</span>
+                    </div>
+                    <p class="text-sm text-slate-500 mt-1">ارسال شده به زرین‌پال • ۳ هفته پیش</p>
+                    <p class="text-xs text-slate-400 mt-2">رزومه: Modern Blue</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <a href="#"
+                        class="px-5 py-2.5 rounded-xl bg-red-50 text-red-600 font-bold text-sm hover:bg-red-100 transition">مشاهده
+                        وضعیت</a>
+                    <button class="p-2.5 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition">
+                        <i data-lucide="more-vertical" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock content %}

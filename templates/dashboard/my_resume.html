@@ -1,0 +1,107 @@
+{% extends 'dashboard-base.html' %}
+{% load static %}
+
+{% block title %}رزومه های من | رزومینو{% endblock %}
+
+{% block page_title %}رزومه های من {% endblock %}
+
+
+{% block content %}
+
+<div class="max-w-7xl mx-auto space-y-8">
+
+    <!-- Header -->
+    <section
+        class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-blue-600 via-indigo-600 to-slate-900 p-8 md:p-10 text-white shadow-2xl shadow-blue-200">
+        <div class="absolute -top-20 -left-20 w-72 h-72 bg-cyan-400/30 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-24 right-20 w-72 h-72 bg-purple-500/30 rounded-full blur-3xl"></div>
+        <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div>
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 backdrop-blur-xl text-sm mb-4">
+                    <i data-lucide="file-text" class="w-4 h-4"></i>
+                    رزومه‌های من
+                </div>
+                <h1 class="text-3xl md:text-4xl font-black leading-relaxed">
+                    رزومه‌های خود را مدیریت کنید
+                </h1>
+                <p class="text-blue-100 mt-3 leading-8 max-w-xl">
+                    تمام رزومه‌هایی که ساخته‌اید را مشاهده، ویرایش و مدیریت کنید.
+                </p>
+            </div>
+            <a href="#"
+                class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-white text-blue-700 font-bold hover:bg-blue-50 transition shadow-lg">
+                <i data-lucide="plus" class="w-5 h-5"></i>
+                ساخت رزومه جدید
+            </a>
+        </div>
+    </section>
+
+    <!-- لیست رزومه‌ها -->
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- کارت رزومه ۱ -->
+        <div
+            class="bg-white rounded-[2rem] border border-slate-100 shadow-sm overflow-hidden hover:shadow-xl hover:-translate-y-1 transition">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center">
+                        <i data-lucide="user" class="w-6 h-6"></i>
+                    </div>
+                    <span class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-bold">فعال</span>
+                </div>
+                <h3 class="text-xl font-black text-slate-900">رزومه‌ی برنامه‌نویسی</h3>
+                <p class="text-sm text-slate-500 mt-1">آخرین ویرایش: ۲ روز پیش</p>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="px-3 py-1 rounded-xl bg-slate-100 text-xs font-bold text-slate-600">Django</span>
+                    <span class="px-3 py-1 rounded-xl bg-slate-100 text-xs font-bold text-slate-600">Python</span>
+                </div>
+                <div class="flex items-center gap-3 mt-5 pt-5 border-t border-slate-100">
+                    <a href="#" class="text-blue-600 font-bold text-sm hover:underline">ویرایش</a>
+                    <a href="#" class="text-slate-500 text-sm hover:underline">پیش‌نمایش</a>
+                    <a href="#" class="text-red-500 text-sm hover:underline mr-auto">حذف</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- کارت رزومه ۲ -->
+        <div
+            class="bg-white rounded-[2rem] border border-slate-100 shadow-sm overflow-hidden hover:shadow-xl hover:-translate-y-1 transition">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center">
+                        <i data-lucide="briefcase" class="w-6 h-6"></i>
+                    </div>
+                    <span class="px-3 py-1 rounded-full bg-amber-50 text-amber-600 text-xs font-bold">پیش‌نویس</span>
+                </div>
+                <h3 class="text-xl font-black text-slate-900">رزومه‌ی مدیریتی</h3>
+                <p class="text-sm text-slate-500 mt-1">آخرین ویرایش: ۱ هفته پیش</p>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="px-3 py-1 rounded-xl bg-slate-100 text-xs font-bold text-slate-600">مدیریت پروژه</span>
+                    <span class="px-3 py-1 rounded-xl bg-slate-100 text-xs font-bold text-slate-600">تیم‌سازی</span>
+                </div>
+                <div class="flex items-center gap-3 mt-5 pt-5 border-t border-slate-100">
+                    <a href="#" class="text-blue-600 font-bold text-sm hover:underline">ویرایش</a>
+                    <a href="#" class="text-slate-500 text-sm hover:underline">پیش‌نمایش</a>
+                    <a href="#" class="text-red-500 text-sm hover:underline mr-auto">حذف</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- کارت ساخت رزومه جدید -->
+        <div
+            class="bg-white rounded-[2rem] border-2 border-dashed border-slate-200 shadow-sm overflow-hidden hover:border-blue-400 hover:bg-blue-50/30 transition cursor-pointer">
+            <div class="p-6 flex flex-col items-center justify-center min-h-[200px]">
+                <div class="w-16 h-16 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center mb-4">
+                    <i data-lucide="plus" class="w-8 h-8"></i>
+                </div>
+                <h3 class="text-xl font-black text-slate-700">ساخت رزومه جدید</h3>
+                <p class="text-sm text-slate-400 mt-1">از یک قالب حرفه‌ای شروع کنید</p>
+            </div>
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock content %}
