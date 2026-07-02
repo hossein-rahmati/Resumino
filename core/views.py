@@ -12,7 +12,7 @@ import os
 def home_view(request, author_username=None):
     comments = Comment.objects.filter(status=True)
     if author_username:
-        posts: BaseManager[Comment] = posts.filter(author__username=author_username)
+        comments = comments.filter(author__username=author_username)
     context = {"comments": comments}
     return render(request, "core/home.html", context)
 
@@ -27,13 +27,6 @@ def contact_view(request):
 
 API_KEY = os.environ.get("API_KEY")
 client = Groq(api_key=API_KEY)
-try:
-    completion = client.chat.completions.create(
-        model="llama-3.1-8b-instant", messages=[{"role": "user", "content": "Hi"}]
-    )
-    print("اتصال برقرار است:", completion.choices[0].message.content)
-except Exception as e:
-    print("خطای اتصال:", e)
 
 
 @csrf_exempt

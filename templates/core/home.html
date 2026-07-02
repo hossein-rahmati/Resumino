@@ -127,19 +127,17 @@
 </style>
 
 <section class="comments-wrapper">
-    <div class="container">
-        <h3 class="text-center mb-5 fw-bold" style="color: #1a202c;">تجربه کاربران ما</h3>
+    <div class="max-w-6xl mx-auto px-4">
+        <h3 class="text-center text-3xl font-extrabold mb-10 text-[#1a202c]">تجربه کاربران ما</h3>
         
-        <div class="row g-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             {% for Comment in comments %}
-            <div class="col-md-6">
-                <div class="comment-card">
-                    <div class="quote-icon">"</div>
-                    <div class="comment-body">
-                        <h6>{{Comment.author.get_full_name}}</h6>
-                        <p>{{Comment.content}}</p>
-                        <span class="user-tag">{{Comment.job}}</span>
-                    </div>
+            <div class="comment-card">
+                <div class="quote-icon">"</div>
+                <div class="comment-body">
+                    <h6>{{Comment.author.get_full_name}}</h6>
+                    <p>{{Comment.content}}</p>
+                    <span class="user-tag">{{Comment.job}}</span>
                 </div>
             </div>
             {% endfor %}
