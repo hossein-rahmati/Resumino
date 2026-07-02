@@ -1,4 +1,3 @@
-from django.db.models.manager import BaseManager
 from django.shortcuts import render
 from core.models import Comment
 from groq import Groq
@@ -8,7 +7,6 @@ import json
 import os
 
 
-# Create your views here.
 def home_view(request, author_username=None):
     comments = Comment.objects.filter(status=True)
     if author_username:
@@ -25,10 +23,6 @@ def contact_view(request):
     return render(request, "core/contact.html")
 
 
-API_KEY = os.environ.get("API_KEY")
-client = Groq(api_key=API_KEY)
-
-
 @csrf_exempt
 def ai_resume_coach(request):
     if request.method == "POST":
@@ -36,9 +30,18 @@ def ai_resume_coach(request):
             data = json.loads(request.body)
             user_message = data.get("message")
 
+            # >>> کلید API و کلاینت رو اینجا بساز <<<
+            api_key = os.environ.get("API_KEY")
+            if not api_key:
+                return JsonResponse(
+                    {"reply": "کلید API تنظیم نشده. لطفاً با پشتیبان تماس بگیرید."},
+                    status=500
+                )
+            client = Groq(api_key=api_key)
+
             # فراخوانی مدل Groq
             completion = client.chat.completions.create(
-                model="llama-3.1-8b-instant",  # مدل فوق سریع و رایگان
+                model="llama-3.1-8b-instant",
                 messages=[
                     {
                         "role": "system",
@@ -54,7 +57,7 @@ def ai_resume_coach(request):
             return JsonResponse({"reply": ai_reply})
 
         except Exception as e:
-            print(f"Groq Error: {e}")  # برای دیدن خطا در ترمینال
+            print(f"Groq Error: {e}")
             return JsonResponse(
                 {"reply": "اوپس! ارتباطم با مغز متفکرم قطع شده. دوباره امتحان کن."},
                 status=500,
