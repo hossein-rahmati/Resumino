@@ -4,6 +4,9 @@ from django.contrib.auth.views import LoginView
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
 
 
+from django.contrib import messages
+
+
 def register_view(request):
     if request.user.is_authenticated:
         return redirect("dashboard")
@@ -12,6 +15,7 @@ def register_view(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "ثبت‌نام شما با موفقیت انجام شد. اکنون می‌توانید وارد حساب خود شوید.")
             return redirect("login")
     else:
         form = CustomUserCreationForm()
