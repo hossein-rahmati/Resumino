@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from core.models import Profile, Resume, Submission
-from dashboard.forms import ResumeForm, SubmissionForm, CommentForm
+# from dashboard.forms import ResumeForm, SubmissionForm, CommentForm
+from core.forms import UserUpdateForm, ProfileUpdateForm 
 
 def calculate_completion(user):
     score = 0
