@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     "core",
     "accounts",
     "dashboard",
+    "resume_builder",
+
 ]
 
 MIDDLEWARE = [

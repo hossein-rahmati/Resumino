@@ -83,7 +83,7 @@ def account_settings(request):
 
 @login_required
 def my_resume_view(request):
-    resumes = Resume.objects.filter(user=request.user)
+    resumes = Resume.objects.filter(user=request.user).order_by('updated_at')
     return render(request, 'dashboard/my_resume.html', {'resumes': resumes})
 
 

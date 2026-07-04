@@ -56,7 +56,8 @@ class Resume(models.Model):
     projects = models.JSONField(default=list, blank=True)     
     certificates = models.JSONField(default=list, blank=True) 
     
-    
+    resume_title = models.CharField(max_length=200, blank=True, null=True)
+
     template_name = models.CharField(max_length=50, default='modern')  
     is_public = models.BooleanField(default=False) 
     
