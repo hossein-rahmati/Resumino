@@ -1,10 +1,39 @@
 from django.urls import path
-from dashboard.views import *
+from .views import (
+    dashboard_view,
+    my_resume_view,
+    create_resume_view,
+    edit_resume_view,
+    delete_resume_view,
+    set_primary_resume_view,
+    change_template_view,
+    preview_resume_view,
+    template_view,
+    jobs_view,
+    toggle_save_job,
+    apply_job_view,
+    submissions_view,
+    add_manual_submission_view,
+    update_submission_status_view,
+    delete_submission_view,
+)
 
 urlpatterns = [
     path("", dashboard_view, name="dashboard"),
     path("resume/", my_resume_view, name="my_resume"),
+    path("resume/create/", create_resume_view, name="create_resume"),
+    path("resume/<int:resume_id>/edit/", edit_resume_view, name="edit_resume"),
+    path("resume/<int:resume_id>/delete/", delete_resume_view, name="delete_resume"),
+    path("resume/<int:resume_id>/set-primary/", set_primary_resume_view, name="set_primary_resume"),
+    path("resume/<int:resume_id>/change-template/", change_template_view, name="change_template"),
+    path("resume/<int:resume_id>/preview/", preview_resume_view, name="preview_resume"),
     path("template/", template_view, name="template"),
-    path("jobs/", jobs_view, name="job"),
-    path('submissions/',submissions_view,name='submissions')
+    path("templates/", template_view, name="templates"),
+    path("jobs/", jobs_view, name="jobs"),
+    path("jobs/save/<int:job_id>/", toggle_save_job, name="toggle_save_job"),
+    path("jobs/apply/<int:job_id>/", apply_job_view, name="apply_job"),
+    path("submissions/", submissions_view, name="submissions"),
+    path("submissions/add-manual/", add_manual_submission_view, name="add_manual_submission"),
+    path("submissions/<int:submission_id>/update-status/", update_submission_status_view, name="update_submission_status"),
+    path("submissions/<int:submission_id>/delete/", delete_submission_view, name="delete_submission"),
 ]

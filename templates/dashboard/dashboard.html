@@ -1,0 +1,427 @@
+{% extends 'dashboard-base.html' %}
+
+{% block title %}داشبورد اصلی | رزومینو{% endblock %}
+{% block page_title %}داشبورد اصلی{% endblock %}
+
+{% block content %}
+
+<div class="space-y-8">
+
+    <!-- ================= 1. HERO BANNER & RESUME SCORE CARD ================= -->
+    <section class="relative overflow-hidden rounded-[2.2rem] bg-gradient-to-br from-blue-700 via-indigo-700 to-slate-900 p-7 md:p-10 text-white shadow-xl shadow-blue-500/10">
+        
+        <!-- Ambient decorative blurs -->
+        <div class="absolute -top-24 -left-24 w-80 h-80 bg-cyan-400/25 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 right-10 w-80 h-80 bg-purple-500/25 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <!-- Left Text / Call to Action -->
+            <div class="lg:col-span-7 space-y-4">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-xs font-bold text-blue-100">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-cyan-300"></i>
+                    پنل هوشمند ساخت رزومه و کاریابی تخصصی
+                </div>
+
+                <h1 class="text-2xl md:text-4xl font-black leading-snug">
+                    سلام {% if user.profile %}{{ user.profile.get_display_name }}{% else %}{{ user.username }}{% endif %} عزیز، خوش آمدید! 👋
+                </h1>
+
+                <p class="text-blue-100 text-sm md:text-base leading-relaxed max-w-xl">
+                    رزومه شما با سیستم هوش مصنوعی اسکن شده و آماده ارسال برای برترین شرکت‌های فناوری و استارتاپ‌های کشور است.
+                </p>
+
+                <div class="flex flex-wrap items-center gap-3 pt-3">
+                    <a href="{% url 'my_resume' %}"
+                       class="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-white text-blue-800 font-extrabold text-sm hover:bg-blue-50 transition shadow-lg shadow-black/10 hover:scale-[1.02] active:scale-[0.98]">
+                        <i data-lucide="pen-tool" class="w-4 h-4 text-blue-600"></i>
+                        مدیریت و ویرایش رزومه
+                    </a>
+
+                    <a href="{% url 'jobs' %}"
+                       class="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-white/15 border border-white/25 backdrop-blur-md text-white font-bold text-sm hover:bg-white/25 transition hover:scale-[1.02] active:scale-[0.98]">
+                        <i data-lucide="briefcase" class="w-4 h-4"></i>
+                        فرصت‌های شغلی مرتبط
+                    </a>
+
+                    <a href="{% url 'template' %}"
+                       class="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-indigo-950/40 border border-white/15 backdrop-blur-md text-cyan-200 font-bold text-sm hover:bg-indigo-950/60 transition">
+                        <i data-lucide="palette" class="w-4 h-4"></i>
+                        تغییر قالب
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Resume Health Card -->
+            <div class="lg:col-span-5 bg-white/10 border border-white/20 rounded-[2rem] p-6 backdrop-blur-xl shadow-2xl">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-xs text-blue-200 font-medium">رزومه فعال:</span>
+                        <h3 class="font-black text-lg text-white truncate max-w-[200px]">
+                            {{ primary_resume.title|default:"رزومه اصلی" }}
+                        </h3>
+                    </div>
+                    <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-cyan-300">
+                        <i data-lucide="shield-check" class="w-6 h-6"></i>
+                    </div>
+                </div>
+
+                <!-- ATS Score & Progress Bar -->
+                <div class="mt-5 space-y-2">
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-blue-100 font-medium">نمره قبولی سیستم‌های ATS:</span>
+                        <span class="font-black text-sm px-2 py-0.5 rounded-lg bg-emerald-400/20 text-emerald-300 border border-emerald-400/30">
+                            {{ primary_resume.ats_score|default:"85" }} از ۱۰۰
+                        </span>
+                    </div>
+                    <div class="h-3 rounded-full bg-white/15 overflow-hidden p-0.5">
+                        <div class="h-full rounded-full bg-gradient-to-l from-emerald-400 via-cyan-400 to-blue-300 transition-all duration-1000" style="width: {{ primary_resume.ats_score|default:85 }}%;"></div>
+                    </div>
+                </div>
+
+                <!-- 3 Mini Stats -->
+                <div class="grid grid-cols-3 gap-2.5 mt-5">
+                    <div class="rounded-2xl bg-white/10 p-3 text-center border border-white/10">
+                        <p class="text-xl font-black text-white">{{ total_views|default:"5" }}</p>
+                        <p class="text-[11px] text-blue-200 mt-0.5">بازدید کارفرما</p>
+                    </div>
+                    <div class="rounded-2xl bg-white/10 p-3 text-center border border-white/10">
+                        <p class="text-xl font-black text-white">{{ total_submissions|default:"1" }}</p>
+                        <p class="text-[11px] text-blue-200 mt-0.5">ارسال رزومه</p>
+                    </div>
+                    <div class="rounded-2xl bg-white/10 p-3 text-center border border-white/10">
+                        <p class="text-xl font-black text-emerald-300">{{ active_interviews|default:"0" }}</p>
+                        <p class="text-[11px] text-blue-200 mt-0.5">مصاحبه</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ================= 2. KEY STATS OVERVIEW (4 CARDS) ================= -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        
+        <!-- Total Resumes -->
+        <div class="bg-white rounded-3xl p-5 border border-slate-200/80 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-bold text-slate-400">تعداد کل رزومه‌ها</p>
+                    <h3 class="text-2xl font-black text-slate-900 mt-1">{{ total_resumes }}</h3>
+                </div>
+                <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                    <i data-lucide="file-text" class="w-6 h-6"></i>
+                </div>
+            </div>
+            <div class="mt-4 flex items-center justify-between text-xs">
+                <span class="text-slate-500 font-medium">قالب فعال:</span>
+                <span class="font-bold text-blue-600 uppercase">{{ primary_resume.template_name|default:"Modern" }}</span>
+            </div>
+        </div>
+
+        <!-- ATS Score -->
+        <div class="bg-white rounded-3xl p-5 border border-slate-200/80 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-bold text-slate-400">میانگین امتیاز کیفی</p>
+                    <h3 class="text-2xl font-black text-emerald-600 mt-1">{{ avg_ats }}٪</h3>
+                </div>
+                <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                    <i data-lucide="award" class="w-6 h-6"></i>
+                </div>
+            </div>
+            <div class="mt-4 flex items-center gap-1.5 text-xs text-emerald-700 font-bold">
+                <i data-lucide="check-check" class="w-4 h-4"></i>
+                استاندارد و آماده ارسال
+            </div>
+        </div>
+
+        <!-- Total Submissions -->
+        <div class="bg-white rounded-3xl p-5 border border-slate-200/80 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-bold text-slate-400">درخواست‌های ارسالی</p>
+                    <h3 class="text-2xl font-black text-slate-900 mt-1">{{ total_submissions }}</h3>
+                </div>
+                <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center">
+                    <i data-lucide="send" class="w-6 h-6"></i>
+                </div>
+            </div>
+            <div class="mt-4 flex items-center justify-between text-xs">
+                <a href="{% url 'submissions' %}" class="text-blue-600 font-bold hover:underline flex items-center gap-1">
+                    پیگیری وضعیت
+                    <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                </a>
+                <span class="text-slate-400">در ترکر</span>
+            </div>
+        </div>
+
+        <!-- Profile Views -->
+        <div class="bg-white rounded-3xl p-5 border border-slate-200/80 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-bold text-slate-400">بازدید رزومه‌ها</p>
+                    <h3 class="text-2xl font-black text-slate-900 mt-1">{{ total_views }}</h3>
+                </div>
+                <div class="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center">
+                    <i data-lucide="eye" class="w-6 h-6"></i>
+                </div>
+            </div>
+            <div class="mt-4 flex items-center gap-1.5 text-xs text-blue-600 font-bold">
+                <i data-lucide="trending-up" class="w-4 h-4"></i>
+                افزایش بازدید در هفته اخیر
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ================= 3. RESUMES & SUBMISSIONS GRID ================= -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Left 7 Cols: Resumes List & Actions -->
+        <div class="lg:col-span-7 space-y-6">
+            
+            <div class="bg-white rounded-[2rem] border border-slate-200/80 shadow-sm p-6 md:p-7">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h2 class="text-xl font-black text-slate-900 flex items-center gap-2.5">
+                            <i data-lucide="file-text" class="w-5 h-5 text-blue-600"></i>
+                            رزومه‌های من
+                        </h2>
+                        <p class="text-xs text-slate-400 mt-1">رزومه‌های ساخته‌شده و آماده دانلود یا اشتراک‌گذاری</p>
+                    </div>
+                    <a href="{% url 'my_resume' %}" class="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1 bg-blue-50 px-3 py-1.5 rounded-xl transition">
+                        مشاهده همه
+                        <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+                <!-- Resumes Loop -->
+                <div class="space-y-4">
+                    {% for res in resumes %}
+                    <div class="p-5 rounded-2xl border border-slate-200 hover:border-blue-300 bg-slate-50/50 hover:bg-blue-50/20 transition group flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        
+                        <div class="flex items-start gap-4">
+                            <!-- Icon / Color badge -->
+                            <div class="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-blue-200">
+                                <i data-lucide="file-code" class="w-6 h-6"></i>
+                            </div>
+
+                            <div class="space-y-1">
+                                <div class="flex items-center gap-2">
+                                    <h3 class="font-black text-slate-900 text-base group-hover:text-blue-700 transition">
+                                        {{ res.title }}
+                                    </h3>
+                                    {% if res.is_primary %}
+                                    <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">
+                                        اصلی
+                                    </span>
+                                    {% endif %}
+                                </div>
+                                <p class="text-xs text-slate-500 font-medium">
+                                    {{ res.target_job|default:"توسعه‌دهنده نرم‌افزار" }} • قالب {{ res.template_name|title }}
+                                </p>
+                                <div class="flex items-center gap-3 text-[11px] text-slate-400 pt-1">
+                                    <span>نمره ATS: <strong class="text-slate-700">{{ res.ats_score }}٪</strong></span>
+                                    <span>•</span>
+                                    <span>بروزرسانی: {{ res.updated_at|date:"Y/m/d" }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="flex items-center gap-2 self-end sm:self-center">
+                            <a href="{% url 'preview_resume' res.id %}" target="_blank"
+                               class="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-700 text-xs font-bold hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition shadow-sm" title="پیش‌نمایش و چاپ PDF">
+                                <i data-lucide="eye" class="w-4 h-4"></i>
+                                پیش‌نمایش
+                            </a>
+                            <a href="{% url 'my_resume' %}"
+                               class="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold hover:bg-blue-700 transition shadow-sm shadow-blue-300">
+                                <i data-lucide="edit-3" class="w-4 h-4"></i>
+                                ویرایش
+                            </a>
+                        </div>
+
+                    </div>
+                    {% empty %}
+                    <div class="text-center py-10 border-2 border-dashed border-slate-200 rounded-2xl p-6">
+                        <i data-lucide="file-plus" class="w-10 h-10 text-slate-300 mx-auto mb-3"></i>
+                        <p class="text-sm font-bold text-slate-700">هنوز هیچ رزومه‌ای ایجاد نکرده‌اید</p>
+                        <p class="text-xs text-slate-400 mt-1">با ساخت اولین رزومه شانس استخدام خود را دوبرابر کنید.</p>
+                        <a href="{% url 'my_resume' %}" class="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold hover:bg-blue-700 transition">
+                            ساخت اولین رزومه
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Footer button -->
+                <div class="mt-6 pt-5 border-t border-slate-100 flex items-center justify-between">
+                    <span class="text-xs text-slate-400">می‌توانید برای موقعیت‌های شغلی مختلف رزومه‌های مجزا بسازید.</span>
+                    <a href="{% url 'my_resume' %}" class="text-xs font-bold text-blue-700 hover:underline flex items-center gap-1">
+                        + رزومه جدید
+                    </a>
+                </div>
+            </div>
+
+            <!-- Recent Submissions Tracker -->
+            <div class="bg-white rounded-[2rem] border border-slate-200/80 shadow-sm p-6 md:p-7">
+                <div class="flex items-center justify-between mb-5">
+                    <div>
+                        <h2 class="text-xl font-black text-slate-900 flex items-center gap-2.5">
+                            <i data-lucide="send" class="w-5 h-5 text-amber-600"></i>
+                            آخرین وضعیت ارسال‌های رزومه
+                        </h2>
+                        <p class="text-xs text-slate-400 mt-1">پیگیری زنده پاسخ شرکت‌ها و وضعیت درخواست‌های همکاری</p>
+                    </div>
+                    <a href="{% url 'submissions' %}" class="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1 bg-blue-50 px-3 py-1.5 rounded-xl transition">
+                        همه درخواست‌ها
+                        <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+                <div class="space-y-3">
+                    {% for sub in submissions %}
+                    <div class="p-4 rounded-2xl border border-slate-100 bg-slate-50/60 flex items-center justify-between gap-4">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 font-black flex items-center justify-center text-sm">
+                                {{ sub.company_name|slice:":1" }}
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-900">{{ sub.job_title }}</h4>
+                                <p class="text-xs text-slate-500">{{ sub.company_name }} • {{ sub.applied_date|date:"Y/m/d" }}</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            {% if sub.status == 'pending' %}
+                            <span class="text-xs font-bold px-3 py-1 rounded-full bg-slate-200 text-slate-700 flex items-center gap-1">
+                                <i data-lucide="clock-3" class="w-3.5 h-3.5"></i>
+                                در انتظار بررسی
+                            </span>
+                            {% elif sub.status == 'reviewing' %}
+                            <span class="text-xs font-bold px-3 py-1 rounded-full bg-amber-100 text-amber-800 flex items-center gap-1">
+                                <i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i>
+                                در حال بررسی
+                            </span>
+                            {% elif sub.status == 'interview' %}
+                            <span class="text-xs font-bold px-3 py-1 rounded-full bg-blue-100 text-blue-800 flex items-center gap-1">
+                                <i data-lucide="video" class="w-3.5 h-3.5"></i>
+                                دعوت به مصاحبه
+                            </span>
+                            {% elif sub.status == 'accepted' %}
+                            <span class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 flex items-center gap-1">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5"></i>
+                                پیشنهاد همکاری
+                            </span>
+                            {% else %}
+                            <span class="text-xs font-bold px-3 py-1 rounded-full bg-red-100 text-red-800 flex items-center gap-1">
+                                <i data-lucide="x-circle" class="w-3.5 h-3.5"></i>
+                                عدم پذیرش
+                            </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="text-center py-6 text-slate-400 text-xs">
+                        هنوز برای موقعیتی رزومه ارسال نکرده‌اید.
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Right 5 Cols: Recommended Jobs & AI Coach Advice -->
+        <div class="lg:col-span-5 space-y-6">
+            
+            <!-- Recommended Jobs -->
+            <div class="bg-white rounded-[2rem] border border-slate-200/80 shadow-sm p-6 md:p-7">
+                <div class="flex items-center justify-between mb-5">
+                    <div>
+                        <h2 class="text-xl font-black text-slate-900 flex items-center gap-2.5">
+                            <i data-lucide="sparkles" class="w-5 h-5 text-emerald-600"></i>
+                            فرصت‌های شغلی پیشنهادی
+                        </h2>
+                        <p class="text-xs text-slate-400 mt-1">تطبیق‌یافته با مهارت‌های رزومه شما</p>
+                    </div>
+                    <a href="{% url 'jobs' %}" class="text-xs font-bold text-emerald-700 hover:underline">
+                        مشاهده همه
+                    </a>
+                </div>
+
+                <div class="space-y-3">
+                    {% for job in featured_jobs %}
+                    <div class="p-4 rounded-2xl border border-slate-100 hover:border-blue-200 hover:bg-blue-50/30 transition group">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-11 h-11 rounded-2xl bg-slate-900 text-white font-black flex items-center justify-center text-sm shadow-sm">
+                                    {{ job.company_initial }}
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-slate-900 group-hover:text-blue-700 transition">
+                                        {{ job.title }}
+                                    </h4>
+                                    <p class="text-xs text-slate-500 mt-0.5">
+                                        {{ job.company_name }} • <span class="text-blue-600 font-bold">{{ job.work_mode }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between mt-3.5 pt-3 border-t border-slate-100 text-xs">
+                            <span class="font-bold text-slate-700">{{ job.salary_range }}</span>
+                            
+                            <form method="post" action="{% url 'apply_job' job.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="inline-flex items-center gap-1 text-xs font-bold text-blue-600 bg-blue-50 hover:bg-blue-600 hover:text-white px-3 py-1.5 rounded-xl transition">
+                                    <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                                    ارسال سریع
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- AI Career Optimizer Tips -->
+            <div class="rounded-[2rem] bg-gradient-to-br from-slate-900 to-indigo-950 p-6 text-white shadow-xl">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-2xl bg-indigo-500/30 border border-indigo-400/30 flex items-center justify-center text-cyan-300">
+                        <i data-lucide="sparkles" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-black text-sm">توصیه‌های مربی هوشمند رزومینو</h3>
+                        <p class="text-[11px] text-slate-400">۳ نکته برای افزایش شانس مصاحبه</p>
+                    </div>
+                </div>
+
+                <div class="space-y-3 text-xs leading-relaxed text-slate-200">
+                    <div class="p-3 rounded-xl bg-white/10 border border-white/10 flex items-start gap-2.5">
+                        <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5"></i>
+                        <p>افزودن دستاوردهای عددی (مثلاً «افزایش ۳۰٪ سرعت پاسخ‌دهی سرور») نمره رزومه را تا ۲۵٪ بالا می‌برد.</p>
+                    </div>
+                    <div class="p-3 rounded-xl bg-white/10 border border-white/10 flex items-start gap-2.5">
+                        <i data-lucide="check-circle" class="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5"></i>
+                        <p>قالب Modern و Minimal بهترین هماهنگی را با ربات‌های ATS دارند.</p>
+                    </div>
+                </div>
+
+                <button onclick="document.getElementById('toggle-chat').click()" class="w-full mt-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 font-bold text-xs text-white transition flex items-center justify-center gap-2 shadow-lg shadow-blue-500/30">
+                    <i data-lucide="message-square" class="w-4 h-4"></i>
+                    گفتگو با مربی و آنالیز تخصصی
+                </button>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}
