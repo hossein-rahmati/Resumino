@@ -1,0 +1,275 @@
+{% extends 'dashboard-base.html' %}
+
+{% block title %}فرصت‌های شغلی | رزومینو{% endblock %}
+{% block page_title %}فرصت‌های شغلی پیشنهادی{% endblock %}
+
+{% block content %}
+
+<div class="space-y-8">
+
+    <!-- Search & Filters Header -->
+    <div class="bg-white rounded-[2rem] border border-slate-200/80 p-6 md:p-8 shadow-sm space-y-6">
+        
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+            <div class="space-y-1">
+                <h2 class="text-xl font-black text-slate-900 flex items-center gap-2.5">
+                    <span class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
+                        <i data-lucide="briefcase" class="w-5 h-5"></i>
+                    </span>
+                    جستجو در میان موقعیت‌های شغلی برتر
+                </h2>
+                <p class="text-xs md:text-sm text-slate-500">
+                    فرصت‌های شغلی هماهنگ با مهارت‌های شما در شرکت‌های معتبر تکنولوژی ایران
+                </p>
+            </div>
+
+            <div class="flex items-center gap-2 text-xs font-bold text-slate-500">
+                <i data-lucide="sparkles" class="w-4 h-4 text-emerald-500"></i>
+                تعداد آگهی‌ها: <span class="text-slate-900">{{ jobs.count }} موقعیت فعال</span>
+            </div>
+        </div>
+
+        <!-- Search Form -->
+        <form method="get" action="{% url 'jobs' %}" class="grid grid-cols-1 md:grid-cols-12 gap-4">
+            
+            <div class="md:col-span-5 relative">
+                <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute right-4 top-1/2 -translate-y-1/2"></i>
+                <input type="text" name="q" value="{{ query }}" placeholder="جستجو در عنوان شغلی، شرکت یا مهارت (مثلاً Django)..."
+                       class="w-full pr-11 pl-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-sm focus:ring-2 focus:ring-blue-500 focus:bg-white transition">
+            </div>
+
+            <div class="md:col-span-3">
+                <select name="work_mode" class="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-sm focus:ring-2 focus:ring-blue-500 focus:bg-white transition">
+                    <option value="">همه نحوه کارها (دورکاری / حضوری)</option>
+                    <option value="دورکاری کامل" {% if selected_work_mode == "دورکاری کامل" %}selected{% endif %}>دورکاری کامل</option>
+                    <option value="امکان دورکاری (هیبریدی)" {% if selected_work_mode == "امکان دورکاری (هیبریدی)" %}selected{% endif %}>امکان دورکاری (هیبریدی)</option>
+                    <option value="حضوری" {% if selected_work_mode == "حضوری" %}selected{% endif %}>حضوری</option>
+                </select>
+            </div>
+
+            <div class="md:col-span-2">
+                <select name="category" class="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-sm focus:ring-2 focus:ring-blue-500 focus:bg-white transition">
+                    <option value="">همه دسته‌ها</option>
+                    {% for cat in categories %}
+                    <option value="{{ cat }}" {% if selected_category == cat %}selected{% endif %}>{{ cat }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="md:col-span-2 flex items-center gap-2">
+                <button type="submit" class="flex-1 py-3 px-4 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm transition shadow-md shadow-blue-200 flex items-center justify-center gap-1.5">
+                    <i data-lucide="filter" class="w-4 h-4"></i>
+                    فیلتر
+                </button>
+                {% if query or selected_work_mode or selected_category %}
+                <a href="{% url 'jobs' %}" class="p-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition" title="پاک کردن فیلترها">
+                    <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                </a>
+                {% endif %}
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- Jobs Feed Grid -->
+    <div class="space-y-4">
+
+        {% for job in jobs %}
+        <div class="bg-white rounded-[2rem] border border-slate-200/90 hover:border-blue-300 p-6 md:p-7 shadow-sm hover:shadow-lg transition-all duration-200 space-y-4">
+            
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                
+                <div class="flex items-start gap-4">
+                    <!-- Brand Avatar -->
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-slate-900 to-indigo-900 text-white font-black text-lg flex items-center justify-center flex-shrink-0 shadow-md">
+                        {{ job.company_initial }}
+                    </div>
+
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-2.5 flex-wrap">
+                            <h3 class="text-lg md:text-xl font-black text-slate-900 hover:text-blue-600 transition cursor-pointer">
+                                {{ job.title }}
+                            </h3>
+                            {% if job.is_featured %}
+                            <span class="px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200 text-xs font-bold flex items-center gap-1">
+                                <i data-lucide="flame" class="w-3 h-3 text-amber-500"></i>
+                                ویژه
+                            </span>
+                            {% endif %}
+                            {% if job.is_urgent %}
+                            <span class="px-2.5 py-0.5 rounded-full bg-red-50 text-red-700 border border-red-200 text-xs font-bold">
+                                استخدام فوری
+                            </span>
+                            {% endif %}
+                        </div>
+
+                        <p class="text-xs md:text-sm font-bold text-slate-600 flex items-center gap-2">
+                            <span>{{ job.company_name }}</span>
+                            <span>•</span>
+                            <span class="text-slate-500 flex items-center gap-1">
+                                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-400"></i>
+                                {{ job.location }}
+                            </span>
+                            <span>•</span>
+                            <span class="text-blue-600 font-bold flex items-center gap-1">
+                                <i data-lucide="laptop" class="w-3.5 h-3.5"></i>
+                                {{ job.work_mode }}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Salary & Experience Info -->
+                <div class="text-right md:text-left flex flex-col md:items-end justify-center">
+                    <p class="text-sm font-black text-slate-900">{{ job.salary_range }}</p>
+                    <p class="text-xs text-slate-400 mt-0.5">{{ job.experience_level }}</p>
+                </div>
+
+            </div>
+
+            <!-- Description -->
+            <p class="text-xs md:text-sm text-slate-600 leading-relaxed text-justify">
+                {{ job.description }}
+            </p>
+
+            <!-- Skills & Benefits Chips -->
+            <div class="flex flex-wrap items-center gap-2 pt-2">
+                <span class="text-xs font-bold text-slate-400 ml-1">مهارت‌ها:</span>
+                {% for skill in job.get_skills_list %}
+                <span class="px-3 py-1 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold border border-slate-200/60">
+                    {{ skill }}
+                </span>
+                {% endfor %}
+            </div>
+
+            <!-- Footer / Action Row -->
+            <div class="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-4">
+                
+                <div class="flex items-center gap-2 text-xs text-slate-400">
+                    <i data-lucide="gift" class="w-4 h-4 text-purple-500"></i>
+                    <span>مزایا: {{ job.benefits }}</span>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    
+                    <!-- Save Bookmark Button -->
+                    <a href="{% url 'toggle_save_job' job.id %}"
+                       class="p-2.5 rounded-xl border border-slate-200 hover:bg-slate-100 transition {% if job.id in saved_job_ids %}text-amber-500 bg-amber-50 border-amber-200{% else %}text-slate-400{% endif %}"
+                       title="نشان کردن این شغل">
+                        <i data-lucide="bookmark" class="w-4 h-4 {% if job.id in saved_job_ids %}fill-amber-500{% endif %}"></i>
+                    </a>
+
+                    <!-- Apply Button -->
+                    {% if job.id in applied_job_ids %}
+                    <span class="px-4 py-2.5 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold text-xs flex items-center gap-1.5">
+                        <i data-lucide="check-circle" class="w-4 h-4"></i>
+                        رزومه ارسال شده
+                    </span>
+                    {% else %}
+                    <button onclick="openApplyModal('{{ job.id }}', '{{ job.title|escapejs }}', '{{ job.company_name|escapejs }}')"
+                            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition shadow-md shadow-blue-200">
+                        <i data-lucide="send" class="w-4 h-4"></i>
+                        ارسال رزومه
+                    </button>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+        {% empty %}
+        <div class="py-16 text-center bg-white rounded-[2rem] border-2 border-dashed border-slate-200 p-8">
+            <i data-lucide="search-x" class="w-16 h-16 text-slate-300 mx-auto mb-4"></i>
+            <h3 class="text-xl font-black text-slate-800">هیچ موقعیت شغلی با این مشخصات یافت نشد</h3>
+            <p class="text-sm text-slate-500 mt-2">فیلترها را تغییر دهید یا کلمه کلیدی دیگری را جستجو کنید.</p>
+            <a href="{% url 'jobs' %}" class="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 text-white text-xs font-bold hover:bg-blue-700 transition">
+                مشاهده همه آگهی‌ها
+            </a>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<!-- ================= APPLY JOB MODAL ================= -->
+<div id="apply-job-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-[2rem] shadow-2xl max-w-lg w-full p-6 md:p-8 max-h-[90vh] overflow-y-auto animate-in zoom-in-95 duration-150 text-right">
+        
+        <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
+            <div>
+                <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
+                    <i data-lucide="send" class="w-5 h-5 text-blue-600"></i>
+                    ارسال رزومه برای کارفرما
+                </h3>
+                <p id="modal-job-subtitle" class="text-xs text-slate-500 mt-1"></p>
+            </div>
+            <button onclick="closeApplyModal()" class="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <form id="apply-job-form" method="post" action="" class="space-y-4">
+            {% csrf_token %}
+
+            <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1.5">انتخاب نسخه رزومه برای ارسال</label>
+                <select name="resume_id" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:ring-2 focus:ring-blue-500 focus:bg-white transition">
+                    {% for res in resumes %}
+                    <option value="{{ res.id }}" {% if res.is_primary %}selected{% endif %}>
+                        {{ res.title }} (نمره ATS: {{ res.ats_score }}٪) {% if res.is_primary %}— اصلی{% endif %}
+                    </option>
+                    {% empty %}
+                    <option value="">رزومه‌ای یافت نشد (اطلاعات پیش‌فرض ارسال می‌شود)</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1.5">پیام یا معرفی کوتاه برای کارفرما (اختیاری)</label>
+                <textarea name="note" rows="3" placeholder="توضیح دهید چرا خود را فرد مناسبی برای این موقعیت می‌دانید..."
+                          class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:ring-2 focus:ring-blue-500 focus:bg-white transition"></textarea>
+            </div>
+
+            <div class="p-4 rounded-xl bg-blue-50/70 border border-blue-100 text-xs text-blue-800 leading-relaxed">
+                <i data-lucide="shield-check" class="w-4 h-4 inline-block ml-1"></i>
+                اطلاعات تماس شما به همراه سوابق شغلی و مهارت‌ها با فرمت رسمی رزومینو برای کارفرما ارسال خواهد شد.
+            </div>
+
+            <div class="pt-4 flex items-center justify-end gap-3 border-t border-slate-100">
+                <button type="button" onclick="closeApplyModal()" class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-100 transition">
+                    انصراف
+                </button>
+                <button type="submit" class="px-6 py-2.5 rounded-xl bg-blue-600 text-white font-bold text-sm hover:bg-blue-700 transition shadow-md shadow-blue-200 flex items-center gap-1.5">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    ارسال نهایی رزومه
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<script>
+function openApplyModal(jobId, jobTitle, companyName) {
+    const form = document.getElementById('apply-job-form');
+    form.action = `/dashboard/jobs/apply/${jobId}/`;
+
+    document.getElementById('modal-job-subtitle').innerText = `${jobTitle} در ${companyName}`;
+
+    const modal = document.getElementById('apply-job-modal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    lucide.createIcons();
+}
+function closeApplyModal() {
+    const modal = document.getElementById('apply-job-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+}
+</script>
+
+{% endblock %}
