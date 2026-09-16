@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>{{ resume.title }} | رزومینو</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Persian Font -->
+<link href="https://cdn.jsdelivr.net/npm/vazirmatn@33.003/Vazirmatn-font-face.css" rel="stylesheet" />
+
+<!-- Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+body {
+    font-family: Vazirmatn, system-ui, -apple-system, sans-serif;
+}
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    body {
+        background: white !important;
+        padding: 0 !important;
+    }
+    .resume-sheet {
+        box-shadow: none !important;
+        border: none !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+}
+</style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen py-8 px-4">
+
+<!-- Print Controls Toolbar -->
+<div class="max-w-4xl mx-auto mb-6 bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-4 no-print">
+    <div class="flex items-center gap-3">
+        <a href="{% url 'my_resume' %}" class="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-blue-600 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition">
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            بازگشت به رزومه‌ها
+        </a>
+        <div>
+            <h2 class="text-sm font-black text-slate-900">{{ resume.title }}</h2>
+            <p class="text-[11px] text-slate-400">قالب: {{ resume.template_name|title }} • نمره ATS: {{ resume.ats_score }}٪</p>
+        </div>
+    </div>
+
+    <div class="flex items-center gap-3">
+        <button onclick="window.print()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 text-white font-bold text-xs hover:bg-blue-700 transition shadow-md shadow-blue-300">
+            <i data-lucide="printer" class="w-4 h-4"></i>
+            چاپ یا ذخیره PDF
+        </button>
+    </div>
+</div>
+
+<!-- ================= A4 RESUME SHEET ================= -->
+<div class="resume-sheet max-w-4xl mx-auto bg-white rounded-[2rem] shadow-xl border border-slate-200 p-8 md:p-12 space-y-8">
+
+    <!-- Header Section -->
+    <div class="border-b border-slate-200 pb-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div class="space-y-2">
+            <h1 class="text-3xl font-black text-slate-900">
+                {% if user.get_full_name %}{{ user.get_full_name }}{% else %}{{ user.username }}{% endif %}
+            </h1>
+            <p class="text-lg font-bold text-blue-600">
+                {{ resume.target_job|default:"توسعه‌دهنده نرم‌افزار" }}
+            </p>
+        </div>
+
+        <div class="space-y-1.5 text-xs text-slate-600">
+            {% if user.email %}
+            <div class="flex items-center gap-2">
+                <i data-lucide="mail" class="w-4 h-4 text-slate-400"></i>
+                <span>{{ user.email }}</span>
+            </div>
+            {% endif %}
+            {% if profile.phone_number %}
+            <div class="flex items-center gap-2">
+                <i data-lucide="phone" class="w-4 h-4 text-slate-400"></i>
+                <span dir="ltr">{{ profile.phone_number }}</span>
+            </div>
+            {% endif %}
+            <div class="flex items-center gap-2">
+                <i data-lucide="map-pin" class="w-4 h-4 text-slate-400"></i>
+                <span>ایران، تهران</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary Section -->
+    <div class="space-y-3">
+        <h2 class="text-base font-black text-slate-900 flex items-center gap-2 border-r-4 border-blue-600 pr-3">
+            درباره من و خلاصه حرفه‌ای
+        </h2>
+        <p class="text-sm text-slate-700 leading-relaxed text-justify">
+            {{ resume.summary|default:"متخصص و علاقه‌مند با تجربیات ارزشمند در پروژه‌های مختلف. توانمند در حل مسئله، کار تیمی و توسعه راهکارهای نرم‌افزاری پایدار با به‌کارگیری بهترین متدهای روز دنیا." }}
+        </p>
+    </div>
+
+    <!-- Skills Section -->
+    <div class="space-y-3">
+        <h2 class="text-base font-black text-slate-900 flex items-center gap-2 border-r-4 border-blue-600 pr-3">
+            مهارت‌های تخصصی و فنی
+        </h2>
+        <div class="flex flex-wrap gap-2 pt-1">
+            {% for s in skills_list %}
+            <span class="px-3.5 py-1.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-bold text-slate-800">
+                {{ s }}
+            </span>
+            {% empty %}
+            <span class="text-xs text-slate-400">Python, Django, PostgreSQL, Docker, Git, REST API</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Experience Simulation Section -->
+    <div class="space-y-4">
+        <h2 class="text-base font-black text-slate-900 flex items-center gap-2 border-r-4 border-blue-600 pr-3">
+            سوابق کاری و تجربیات
+        </h2>
+        
+        <div class="space-y-4">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between text-sm">
+                    <h3 class="font-bold text-slate-900">توسعه‌دهنده ارشد بک‌اند</h3>
+                    <span class="text-xs text-slate-400 font-medium">۱۴۰۱ — تاکنون</span>
+                </div>
+                <p class="text-xs text-blue-600 font-bold">شرکت فناوری اطلاعات و داده‌محور</p>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    طراحی معماری میکروسرویس‌ها، افزایش کارایی پایگاه‌های داده و پیاده‌سازی سیستم‌های احراز هویت و کشینگ با ردیس.
+                </p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between text-sm">
+                    <h3 class="font-bold text-slate-900">برنامه‌نویس وب</h3>
+                    <span class="text-xs text-slate-400 font-medium">۱۳۹۹ — ۱۴۰۱</span>
+                </div>
+                <p class="text-xs text-blue-600 font-bold">استارتاپ توسعه پلتفرم‌های ابری</p>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    توسعه REST APIهای ماژولار و اتصال پایگاه داده PostgreSQL به فرانت‌اند اپلیکیشن.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Education Section -->
+    <div class="space-y-3">
+        <h2 class="text-base font-black text-slate-900 flex items-center gap-2 border-r-4 border-blue-600 pr-3">
+            تحصیلات و مدارک
+        </h2>
+        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+                <h3 class="font-bold text-slate-900 text-sm">کارشناسی مهندسی کامپیوتر و نرم‌افزار</h3>
+                <p class="text-xs text-slate-500">دانشگاه دولتی</p>
+            </div>
+            <span class="text-xs text-slate-400">۱۳۹۵ — ۱۳۹۹</span>
+        </div>
+    </div>
+
+</div>
+
+<script>
+lucide.createIcons();
+</script>
+</body>
+</html>
