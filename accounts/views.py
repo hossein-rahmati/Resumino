@@ -78,7 +78,11 @@ def custom_logout_view(request):
 
 @login_required
 def dashboard_view(request):
-    return redirect("dashboard")
+    context = {
+        'user': request.user,
+        'profile': request.user.accounts_profile,
+    }
+    return render(request, 'accounts/dashboard.html', context)
 
 
 @login_required

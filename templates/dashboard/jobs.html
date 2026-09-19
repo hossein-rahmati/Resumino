@@ -30,7 +30,7 @@
         </div>
 
         <!-- Search Form -->
-        <form method="get" action="{% url 'jobs' %}" class="grid grid-cols-1 md:grid-cols-12 gap-4">
+        <form method="get" action="{% url 'dashboard:jobs' %}" class="grid grid-cols-1 md:grid-cols-12 gap-4">
             
             <div class="md:col-span-5 relative">
                 <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute right-4 top-1/2 -translate-y-1/2"></i>
@@ -62,7 +62,7 @@
                     فیلتر
                 </button>
                 {% if query or selected_work_mode or selected_category %}
-                <a href="{% url 'jobs' %}" class="p-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition" title="پاک کردن فیلترها">
+                <a href="{% url 'dashboard:jobs' %}" class="p-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition" title="پاک کردن فیلترها">
                     <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
                 </a>
                 {% endif %}
@@ -184,7 +184,7 @@
             <i data-lucide="search-x" class="w-16 h-16 text-slate-300 mx-auto mb-4"></i>
             <h3 class="text-xl font-black text-slate-800">هیچ موقعیت شغلی با این مشخصات یافت نشد</h3>
             <p class="text-sm text-slate-500 mt-2">فیلترها را تغییر دهید یا کلمه کلیدی دیگری را جستجو کنید.</p>
-            <a href="{% url 'jobs' %}" class="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 text-white text-xs font-bold hover:bg-blue-700 transition">
+            <a href="{% url 'dashboard:jobs' %}" class="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 text-white text-xs font-bold hover:bg-blue-700 transition">
                 مشاهده همه آگهی‌ها
             </a>
         </div>

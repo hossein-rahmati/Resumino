@@ -137,7 +137,7 @@
 
                 <div class="flex items-center gap-2">
                     {% if not res.is_primary %}
-                    <form method="post" action="{% url 'set_primary_resume' res.id %}">
+                    <form method="post" action="{% url 'dashboard:set_primary_resume' res.id %}">
                         {% csrf_token %}
                         <button type="submit" title="تنظیم به عنوان رزومه اصلی"
                                 class="p-2.5 rounded-xl bg-white border border-slate-200 text-slate-600 hover:text-emerald-600 hover:bg-emerald-50 hover:border-emerald-200 transition text-xs font-bold flex items-center gap-1">
@@ -147,7 +147,7 @@
                     </form>
                     {% endif %}
 
-                    <form method="post" action="{% url 'delete_resume' res.id %}" onsubmit="return confirm('آیا از حذف این رزومه اطمینان دارید؟');">
+                    <form method="post" action="{% url 'dashboard:delete_resume' res.id %}" onsubmit="return confirm('آیا از حذف این رزومه اطمینان دارید؟');">
                         {% csrf_token %}
                         <button type="submit" title="حذف رزومه"
                                 class="p-2.5 rounded-xl bg-white border border-slate-200 text-slate-400 hover:text-red-600 hover:bg-red-50 hover:border-red-200 transition">
@@ -191,7 +191,7 @@
             </button>
         </div>
 
-        <form method="post" action="{% url 'create_resume' %}" class="space-y-4">
+        <form method="post" action="{% url 'dashboard:create_resume' %}" class="space-y-4">
             {% csrf_token %}
 
             <div>

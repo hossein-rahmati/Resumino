@@ -5,7 +5,7 @@ from django.dispatch import receiver
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='accounts_profile')
     avatar = models.ImageField(upload_to="avatars/%Y/%m/", blank=True, null=True, verbose_name="تصویر پروفایل")
     phone_number = models.CharField(max_length=20, blank=True, verbose_name="شماره تماس")
     headline = models.CharField(max_length=150, blank=True, verbose_name="عنوان شغلی")
@@ -36,10 +36,6 @@ class Profile(models.Model):
 @receiver(post_save, sender=User)
 def create_or_save_user_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance)
+        Profile.objects.get_or_create(user=instance)
     else:
-        if hasattr(instance, "profile"):
-            instance.profile.save()
-        else:
-            Profile.objects.create(user=instance)
-
+        Profile.objects.get_or_create(user=instance)

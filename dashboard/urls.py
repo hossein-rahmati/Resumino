@@ -16,11 +16,14 @@ from .views import (
     add_manual_submission_view,
     update_submission_status_view,
     delete_submission_view,
+    account_settings,  
 )
+
+app_name = 'dashboard' 
 
 urlpatterns = [
     path("", dashboard_view, name="dashboard"),
-    path('accounts_settings/',account_settings, name="account_settings"),
+    path('accounts_settings/', account_settings, name="account_settings"),
     path("resume/", my_resume_view, name="my_resume"),
     path("resume/create/", create_resume_view, name="create_resume"),
     path("resume/<int:resume_id>/edit/", edit_resume_view, name="edit_resume"),

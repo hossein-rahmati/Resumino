@@ -22,7 +22,7 @@ class Resume(models.Model):
         ("academic", "قالب Academic (آکادمیک و پژوهشی)"),
     ]
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="resumes", verbose_name="کاربر")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='dashboard_resumes', verbose_name="کاربر")
     title = models.CharField(max_length=150, default="رزومه من", verbose_name="عنوان رزومه")
     target_job = models.CharField(max_length=150, blank=True, verbose_name="عنوان شغلی هدف")
     template_name = models.CharField(max_length=50, choices=TEMPLATES, default="modern", verbose_name="قالب انتخابی")
@@ -107,7 +107,7 @@ class JobSubmission(models.Model):
         ("rejected", "عدم پذیرش"),
     ]
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="submissions", verbose_name="کاربر")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='dashboard_submissions', verbose_name="کاربر")
     job = models.ForeignKey(JobListing, on_delete=models.CASCADE, null=True, blank=True, related_name="applications", verbose_name="موقعیت شغلی")
     company_name = models.CharField(max_length=150, verbose_name="نام شرکت")
     job_title = models.CharField(max_length=200, verbose_name="عنوان شغل")

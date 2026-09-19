@@ -202,3 +202,233 @@ def jobs_view(request):
     return render(request,'dashboard/jobs.html')
 def submissions_view(request):
     return render(request,'dashboard/submissions.html')
+
+# ==================== Resume Views ====================
+
+@login_required
+def create_resume_view(request):
+    if request.method == "POST":
+        title = request.POST.get("title", "").strip() or "رزومه جدید"
+        target_job = request.POST.get("target_job", "").strip()
+        template_name = request.POST.get("template_name", "modern")
+        theme_color = request.POST.get("theme_color", "blue")
+        language = request.POST.get("language", "fa")
+        summary = request.POST.get("summary", "").strip()
+        skills = request.POST.get("skills", "").strip()
+
+        is_first = not Resume.objects.filter(user=request.user).exists()
+
+        resume = Resume.objects.create(
+            user=request.user,
+            title=title,
+            target_job=target_job,
+            template_name=template_name,
+            theme_color=theme_color,
+            language=language,
+            summary=summary,
+            skills=skills,
+            is_primary=is_first,
+            completion_percentage=40,
+            ats_score=70,
+        )
+        messages.success(request, "رزومه با موفقیت ساخته شد.")
+        return redirect("dashboard:my_resume")
+
+    return render(request, "dashboard/resume_form.html", {"mode": "create"})
+
+
+@login_required
+def edit_resume_view(request, resume_id):
+    resume = get_object_or_404(Resume, id=resume_id, user=request.user)
+
+    if request.method == "POST":
+        resume.title = request.POST.get("title", resume.title).strip() or resume.title
+        resume.target_job = request.POST.get("target_job", resume.target_job)
+        resume.template_name = request.POST.get("template_name", resume.template_name)
+        resume.theme_color = request.POST.get("theme_color", resume.theme_color)
+        resume.language = request.POST.get("language", resume.language)
+        resume.summary = request.POST.get("summary", resume.summary)
+        resume.skills = request.POST.get("skills", resume.skills)
+        resume.save()
+        messages.success(request, "رزومه با موفقیت ویرایش شد.")
+        return redirect("dashboard:my_resume")
+
+    return render(request, "dashboard/resume_form.html", {"mode": "edit", "resume": resume})
+
+
+@login_required
+def delete_resume_view(request, resume_id):
+    resume = get_object_or_404(Resume, id=resume_id, user=request.user)
+
+    if request.method == "POST":
+        was_primary = resume.is_primary
+        resume.delete()
+        if was_primary:
+            next_resume = Resume.objects.filter(user=request.user).first()
+            if next_resume:
+                next_resume.is_primary = True
+                next_resume.save(update_fields=["is_primary"])
+        messages.success(request, "رزومه حذف شد.")
+        return redirect("dashboard:my_resume")
+
+    return render(request, "dashboard/resume_confirm_delete.html", {"resume": resume})
+
+
+@login_required
+def set_primary_resume_view(request, resume_id):
+    resume = get_object_or_404(Resume, id=resume_id, user=request.user)
+
+    if request.method == "POST":
+        Resume.objects.filter(user=request.user).update(is_primary=False)
+        resume.is_primary = True
+        resume.save(update_fields=["is_primary"])
+        messages.success(request, "رزومه اصلی تغییر کرد.")
+
+    return redirect("dashboard:my_resume")
+
+
+@login_required
+def change_template_view(request, resume_id):
+    resume = get_object_or_404(Resume, id=resume_id, user=request.user)
+
+    if request.method == "POST":
+        resume.template_name = request.POST.get("template_name", resume.template_name)
+        resume.theme_color = request.POST.get("theme_color", resume.theme_color)
+        resume.save(update_fields=["template_name", "theme_color"])
+        messages.success(request, "قالب رزومه تغییر کرد.")
+        return redirect("dashboard:my_resume")
+
+    return render(request, "dashboard/template.html", {"resume": resume})
+
+
+@login_required
+def preview_resume_view(request, resume_id):
+    resume = get_object_or_404(Resume, id=resume_id, user=request.user)
+    resume.views_count = (resume.views_count or 0) + 1
+    resume.save(update_fields=["views_count"])
+    return render(request, "dashboard/resume_preview.html", {"resume": resume})
+
+
+# ==================== Jobs Views ====================
+
+@login_required
+def toggle_save_job(request, job_id):
+    job = get_object_or_404(JobListing, id=job_id)
+    saved, created = SavedJob.objects.get_or_create(user=request.user, job=job)
+
+    if not created:
+        saved.delete()
+        is_saved = False
+    else:
+        is_saved = True
+
+    if request.headers.get("x-requested-with") == "XMLHttpRequest":
+        return JsonResponse({"saved": is_saved, "job_id": job.id})
+
+    return redirect("dashboard:jobs")
+
+
+@login_required
+def apply_job_view(request, job_id):
+    job = get_object_or_404(JobListing, id=job_id)
+
+    if request.method == "POST":
+        resume_id = request.POST.get("resume_id")
+        resume = None
+        if resume_id:
+            resume = Resume.objects.filter(id=resume_id, user=request.user).first()
+        if not resume:
+            resume = Resume.objects.filter(user=request.user, is_primary=True).first() \
+                     or Resume.objects.filter(user=request.user).first()
+
+        JobSubmission.objects.create(
+            user=request.user,
+            job=job,
+            company_name=job.company_name,
+            job_title=job.title,
+            resume=resume,
+            status="submitted",
+            note=request.POST.get("note", ""),
+        )
+        messages.success(request, "درخواست شما با موفقیت ارسال شد.")
+        return redirect("dashboard:submissions")
+
+    resumes = Resume.objects.filter(user=request.user)
+    return render(request, "dashboard/apply_job.html", {"job": job, "resumes": resumes})
+
+
+# ==================== Submission Views ====================
+
+@login_required
+def add_manual_submission_view(request):
+    if request.method == "POST":
+        JobSubmission.objects.create(
+            user=request.user,
+            job=None,
+            company_name=request.POST.get("company_name", "").strip(),
+            job_title=request.POST.get("job_title", "").strip(),
+            resume=Resume.objects.filter(
+                id=request.POST.get("resume_id"), user=request.user
+            ).first(),
+            status=request.POST.get("status", "submitted"),
+            note=request.POST.get("note", ""),
+        )
+        messages.success(request, "درخواست دستی اضافه شد.")
+        return redirect("dashboard:submissions")
+
+    resumes = Resume.objects.filter(user=request.user)
+    return render(request, "dashboard/add_manual_submission.html", {"resumes": resumes})
+
+
+@login_required
+def update_submission_status_view(request, submission_id):
+    submission = get_object_or_404(JobSubmission, id=submission_id, user=request.user)
+
+    if request.method == "POST":
+        new_status = request.POST.get("status")
+        if new_status:
+            submission.status = new_status
+            submission.save(update_fields=["status"])
+            messages.success(request, "وضعیت درخواست به‌روزرسانی شد.")
+
+        if request.headers.get("x-requested-with") == "XMLHttpRequest":
+            return JsonResponse({"status": submission.status})
+
+    return redirect("dashboard:submissions")
+
+
+@login_required
+def delete_submission_view(request, submission_id):
+    submission = get_object_or_404(JobSubmission, id=submission_id, user=request.user)
+
+    if request.method == "POST":
+        submission.delete()
+        messages.success(request, "درخواست حذف شد.")
+
+    return redirect("dashboard:submissions")
+
+
+# ==================== Account Settings ====================
+
+@login_required
+def account_settings(request):
+    profile, _ = Profile.objects.get_or_create(user=request.user)
+
+    if request.method == "POST":
+        user = request.user
+        user.first_name = request.POST.get("first_name", user.first_name)
+        user.last_name = request.POST.get("last_name", user.last_name)
+        user.email = request.POST.get("email", user.email)
+        user.save()
+
+        # اگر فیلدها در Profile وجود دارند این‌ها را نگه دار،
+        # در غیر این صورت با مدل Profile خودت هماهنگ کن.
+        for field in ["phone", "bio", "job_title", "location", "avatar"]:
+            if hasattr(profile, field) and field in request.POST:
+                setattr(profile, field, request.POST.get(field))
+        profile.save()
+
+        messages.success(request, "تنظیمات حساب ذخیره شد.")
+        return redirect("dashboard:account_settings")
+
+    return render(request, "dashboard/account_settings.html", {"profile": profile})
