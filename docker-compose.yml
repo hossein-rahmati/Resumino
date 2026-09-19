@@ -1,0 +1,15 @@
+services:
+  web:
+    build: .
+    container_name: resumino_app
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DEBUG=True
+    restart: unless-stopped
